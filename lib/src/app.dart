@@ -31,26 +31,3 @@ class _AgroNpAppState extends State<AgroNpApp> {
     );
   }
 }
-
-/*class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        // Application name
-        title: 'Flutter Hello World',
-        // Application theme data, you can set the colors for the application as
-        // you want
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: Scaffold(
-          appBar: AppBar(
-            title: const Text('Meu Aplicativo'),
-          ),
-          body: const Text('O corpo do meu app'),
-          drawer: const DrawerMenu(),
-        ));
-  }
-}*/

@@ -3,7 +3,13 @@ import 'package:flutter/material.dart';
 class SubmitButton extends StatefulWidget {
   final String title;
   VoidCallback pressedFunction;
-  SubmitButton({Key? key, required this.title, required this.pressedFunction})
+  GlobalKey<FormState> formKey;
+
+  SubmitButton(
+      {Key? key,
+      required this.title,
+      required this.pressedFunction,
+      required this.formKey})
       : super(key: key);
 
   @override
@@ -23,7 +29,11 @@ class _SubmitButtonState extends State<SubmitButton> {
                 foregroundColor: Colors.white,
                 padding: const EdgeInsets.fromLTRB(70, 18, 70, 18),
                 textStyle: const TextStyle(fontSize: 22)),
-            onPressed: widget.pressedFunction,
+            onPressed: () {
+              if (widget.formKey.currentState!.validate()) {
+                widget.pressedFunction();
+              }
+            },
             child: Text(widget.title)),
       ),
     );
