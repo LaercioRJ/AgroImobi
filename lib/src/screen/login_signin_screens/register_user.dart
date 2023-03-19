@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../components/buttons.dart';
 import '../../widgets/go_back_link_button.dart';
+import '../../widgets/submit_button.dart';
+
+final _formKey = GlobalKey<FormState>();
 
 class RegisterUserScreen extends StatelessWidget {
   @override
@@ -57,6 +61,11 @@ class RegisterUserScreen extends StatelessWidget {
                   labelText: 'Telefone Celular',
                   border: UnderlineInputBorder(),
                 )),
+                SubmitButton(
+                  title: 'Cadastrar',
+                  pressedFunction: () => print('teste'),
+                  formKey: _formKey,
+                ),
                 const GoBackLinkButton(linkText: 'Já possuo cadastro')
               ]),
             ),

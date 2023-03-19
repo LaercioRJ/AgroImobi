@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../components/buttons.dart';
 import '../../widgets/link_button.dart';
 import '../../widgets/go_back_link_button.dart';
 
@@ -19,7 +20,7 @@ class RegisterBrokerScreen extends StatelessWidget {
             child: Center(
                 child: Container(
                     width: MediaQuery.of(context).size.width * 0.8,
-                    height: MediaQuery.of(context).size.width * 1.2,
+                    height: MediaQuery.of(context).size.width * 1.3,
                     decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -63,6 +64,9 @@ class RegisterBrokerScreen extends StatelessWidget {
                             labelText: 'CRECI',
                             border: UnderlineInputBorder(),
                           )),
+                          LoginButtons(
+                              title: 'Cadastrar',
+                              pressedFunction: () => print('teste')),
                           const GoBackLinkButton(linkText: 'Já possuo cadastro')
                         ]))))));
   }
