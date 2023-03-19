@@ -9,7 +9,12 @@ class RegisterUserScreen extends StatelessWidget {
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        decoration: const BoxDecoration(color: Colors.green),
+        decoration: const BoxDecoration(
+          color: Colors.green,
+          image: DecorationImage(
+              image: AssetImage("lib/src/assets/planoFundo.jpg"),
+              fit: BoxFit.cover),
+        ),
         child: Center(
           child: Container(
             decoration: const BoxDecoration(

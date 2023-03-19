@@ -10,7 +10,12 @@ class RegisterBrokerScreen extends StatelessWidget {
         body: Container(
             height: double.infinity,
             width: double.infinity,
-            decoration: const BoxDecoration(color: Colors.green),
+            decoration: const BoxDecoration(
+              color: Colors.green,
+              image: DecorationImage(
+                  image: AssetImage("lib/src/assets/planoFundo.jpg"),
+                  fit: BoxFit.cover),
+            ),
             child: Center(
                 child: Container(
                     width: MediaQuery.of(context).size.width * 0.8,

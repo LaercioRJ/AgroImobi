@@ -26,12 +26,18 @@ class LoginScreenState extends State<LoginScreen> {
         body: Container(
       height: double.infinity,
       width: double.infinity,
-      decoration: const BoxDecoration(color: Colors.green),
+      decoration: const BoxDecoration(
+        color: Colors.green,
+        image: DecorationImage(
+            image: AssetImage("lib/src/assets/planoFundo.jpg"),
+            fit: BoxFit.cover),
+      ),
       child: Center(
           child: Container(
         decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(20))),
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(20)),
+        ),
         width: MediaQuery.of(context).size.width * 0.8,
         height: MediaQuery.of(context).size.width * 0.9,
         child: Padding(
