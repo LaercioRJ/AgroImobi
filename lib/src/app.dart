@@ -4,13 +4,15 @@ import 'routing/delegate.dart';
 import 'routing/parser.dart';
 
 class AgroNpApp extends StatefulWidget {
+  const AgroNpApp({super.key});
+
   @override
   State<StatefulWidget> createState() => _AgroNpAppState();
 }
 
 class _AgroNpAppState extends State<AgroNpApp> {
   final _navigatorKey = GlobalKey<NavigatorState>();
-  late final _routerDelegate;
+  late final AppRouterDelegate _routerDelegate;
 
   final AgroNpInformationParser _routeInformationParser =
       AgroNpInformationParser();

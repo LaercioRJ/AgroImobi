@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../components/buttons.dart';
-import '../../widgets/link_button.dart';
 import '../../widgets/go_back_link_button.dart';
 
 class RegisterBrokerScreen extends StatelessWidget {
+  const RegisterBrokerScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,9 +64,9 @@ class RegisterBrokerScreen extends StatelessWidget {
                             labelText: 'CRECI',
                             border: UnderlineInputBorder(),
                           )),
-                          LoginButtons(
+                          /*LoginButtons(
                               title: 'Cadastrar',
-                              pressedFunction: () => print('teste')),
+                              pressedFunction: () => print('teste')),*/
                           const GoBackLinkButton(linkText: 'Já possuo cadastro')
                         ]))))));
   }

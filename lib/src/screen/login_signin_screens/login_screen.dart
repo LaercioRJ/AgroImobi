@@ -9,7 +9,7 @@ import 'register_broker.dart';
 class LoginScreen extends StatefulWidget {
   final VoidCallback onTapped;
 
-  LoginScreen({super.key, required this.onTapped});
+  const LoginScreen({super.key, required this.onTapped});
 
   @override
   LoginScreenState createState() {

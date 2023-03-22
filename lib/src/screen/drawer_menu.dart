@@ -5,7 +5,7 @@ import 'my_profile_screen.dart';
 class DrawerMenu extends StatelessWidget {
   final Function changeScreen;
 
-  DrawerMenu({super.key, required this.changeScreen});
+  const DrawerMenu({super.key, required this.changeScreen});
 
   @override
   Widget build(BuildContext context) {

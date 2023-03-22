@@ -76,20 +76,20 @@ class AppRouterDelegate extends RouterDelegate<AgroNpRoutePath>
   }
 
   @override
-  Future<void> setNewRoutePath(AgroNpRoutePath path) async {
-    if (path.isUnknown) {
+  Future<void> setNewRoutePath(AgroNpRoutePath configuration) async {
+    if (configuration.isUnknown) {
       show404 = true;
       return;
     }
 
-    if (path.isHomePage) {
+    if (configuration.isHomePage) {
       _isLogged = true;
       _userId = -1;
       _terrainId = -1;
       show404 = false;
     }
 
-    if (path.isLoginPage) {
+    if (configuration.isLoginPage) {
       _isLogged = false;
       _userId = -1;
       _terrainId = -1;

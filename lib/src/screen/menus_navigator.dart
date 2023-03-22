@@ -7,7 +7,7 @@ import 'menus/search_terrain_screen.dart';
 class MenusNavigator extends StatelessWidget {
   final String menuType;
 
-  MenusNavigator({required this.menuType});
+  const MenusNavigator({ super.key, required this.menuType});
 
   @override
   Widget build(BuildContext context) {

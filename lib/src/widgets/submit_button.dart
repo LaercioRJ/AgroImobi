@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 
 class SubmitButton extends StatefulWidget {
   final String title;
-  VoidCallback pressedFunction;
-  GlobalKey<FormState> formKey;
+  final VoidCallback pressedFunction;
+  final GlobalKey<FormState> formKey;
 
-  SubmitButton(
-      {Key? key,
-      required this.title,
-      required this.pressedFunction,
-      required this.formKey})
-      : super(key: key);
+  const SubmitButton({
+    Key? key,
+    required this.title,
+    required this.pressedFunction,
+    required this.formKey})
+    : super(key: key);
 
   @override
   State<SubmitButton> createState() => _SubmitButtonState();

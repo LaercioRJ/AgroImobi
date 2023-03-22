@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../../components/buttons.dart';
 import '../../widgets/go_back_link_button.dart';
 import '../../widgets/submit_button.dart';
 
 final _formKey = GlobalKey<FormState>();
 
 class RegisterUserScreen extends StatelessWidget {
+  const RegisterUserScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
