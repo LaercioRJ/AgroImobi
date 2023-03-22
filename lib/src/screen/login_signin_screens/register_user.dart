@@ -3,22 +3,22 @@ import 'package:flutter/material.dart';
 import '../../widgets/go_back_link_button.dart';
 import '../../widgets/submit_button.dart';
 
-final _formKey = GlobalKey<FormState>();
-
 class RegisterUserScreen extends StatelessWidget {
-  const RegisterUserScreen({super.key});
+  RegisterUserScreen({super.key});
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController passwordController = TextEditingController();
+  final RegExp emailValidator = RegExp("([A-Z | a-z | 0-9]+)@([A-Z | a-z | 0-9]+).com");
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        height: double.infinity,
-        width: double.infinity,
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
         decoration: const BoxDecoration(
-          color: Colors.green,
           image: DecorationImage(
               image: AssetImage("lib/src/assets/planoFundo.jpg"),
-              fit: BoxFit.cover),
+              fit: BoxFit.fill),
         ),
         child: Center(
           child: Container(
@@ -30,49 +30,86 @@ class RegisterUserScreen extends StatelessWidget {
             height: MediaQuery.of(context).size.width * 1.2,
             child: Padding(
               padding: const EdgeInsets.fromLTRB(20, 1, 20, 1),
-              child: Column(children: [
-                const TextField(
-                    decoration: InputDecoration(
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    TextFormField(
+                      decoration: const InputDecoration(
                         labelText: 'Nome Completo',
-                        border: UnderlineInputBorder())),
-                const TextField(
-                    decoration: InputDecoration(
-                  labelText: 'Email',
-                  border: UnderlineInputBorder(),
-                )),
-                const TextField(
-                    decoration: InputDecoration(
-                  labelText: 'Nome de Usuário',
-                  border: UnderlineInputBorder(),
-                )),
-                const TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      labelText: 'Criar Senha',
-                      border: UnderlineInputBorder(),
-                    )),
-                const TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      labelText: 'Confirme a Senha',
-                      border: UnderlineInputBorder(),
-                    )),
-                const TextField(
-                    decoration: InputDecoration(
-                  labelText: 'Telefone Celular',
-                  border: UnderlineInputBorder(),
-                )),
-                SubmitButton(
-                  title: 'Cadastrar',
-                  pressedFunction: () => print('teste'),
-                  formKey: _formKey,
+                        border: UnderlineInputBorder()),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Por favor, preencha este campo";
+                        }
+                        return null;
+                      },),
+                    TextFormField(
+                      decoration: const  InputDecoration(
+                        labelText: 'Email',
+                        border: UnderlineInputBorder()),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Por favor, preencha este campo';
+                        } else {
+                          if (!emailValidator.hasMatch(value)) {
+                            return "Este é um formato inválido de e-mail.";
+                          }
+                        }
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      decoration: const  InputDecoration(
+                        labelText: 'Nome de Usuário',
+                        border: UnderlineInputBorder()),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Por favor, preencha este campo";
+                        }
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      obscureText: true,
+                      decoration: const InputDecoration(
+                        labelText: 'Criar Senha',
+                        border: UnderlineInputBorder()),
+                      controller: passwordController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Por favor, preencha este campo";
+                        }
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      obscureText: true,
+                      decoration: const InputDecoration(
+                        labelText: 'Confirme a Senha',
+                        border: UnderlineInputBorder()),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Por favor, preencha este campo";
+                        } else {
+                          if (value != passwordController.text) {
+                            return "Os campos de senha não são equivalentes.";
+                          }
+                        }
+                        return null;
+                      },
+                    ),
+                    SubmitButton(
+                      title: 'Cadastrar',
+                      pressedFunction: () => print('teste'),
+                      formKey: _formKey,
+                    ),
+                    const GoBackLinkButton(linkText: 'Já possuo cadastro')
+                  ]),),
                 ),
-                const GoBackLinkButton(linkText: 'Já possuo cadastro')
-              ]),
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 }

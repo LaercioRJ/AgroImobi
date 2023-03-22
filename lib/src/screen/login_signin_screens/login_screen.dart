@@ -19,18 +19,18 @@ class LoginScreen extends StatefulWidget {
 
 class LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
+  RegExp emailValidator = RegExp("([A-Z | a-z | 0-9]+)@([A-Z | a-z | 0-9]+).com");
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      height: double.infinity,
-      width: double.infinity,
+      body: Container(
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
       decoration: const BoxDecoration(
-        color: Colors.green,
         image: DecorationImage(
             image: AssetImage("lib/src/assets/planoFundo.jpg"),
-            fit: BoxFit.cover),
+            fit: BoxFit.fill),
       ),
       child: Center(
           child: Container(
@@ -50,7 +50,12 @@ class LoginScreenState extends State<LoginScreen> {
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Por favor, preencha este campo';
+                        } else {
+                          if (!emailValidator.hasMatch(value)) {
+                            return "Este é um formato inválido de e-mail.";
+                          }
                         }
+                        return null;
                       },
                       decoration: const InputDecoration(
                           labelText: 'Usuário',
@@ -60,6 +65,7 @@ class LoginScreenState extends State<LoginScreen> {
                         if (value == null || value.isEmpty) {
                           return 'Por favor, preencha este campo';
                         }
+                        return null;
                       },
                       obscureText: true,
                       decoration: const InputDecoration(
@@ -72,11 +78,11 @@ class LoginScreenState extends State<LoginScreen> {
                     formKey: _formKey,
                   ),
                   LinkButton(
-                      linkText: 'Primeiro Acesso',
-                      linkedPage: RegisterUserScreen()),
-                  LinkButton(
-                      linkText: 'Primeiro Acesso CORRETOR',
-                      linkedPage: RegisterBrokerScreen())
+                    linkText: 'Primeiro Acesso',
+                    linkedPage: RegisterUserScreen()),
+                  const LinkButton(
+                    linkText: 'Primeiro Acesso CORRETOR',
+                    linkedPage: RegisterBrokerScreen())
                 ],
               )),
         ),

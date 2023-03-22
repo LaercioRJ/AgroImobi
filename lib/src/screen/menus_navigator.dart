@@ -14,19 +14,19 @@ class MenusNavigator extends StatelessWidget {
     return Scaffold(
         body: Navigator(
       pages: [
-        MaterialPage(
-          key: const ValueKey('Search Terrain Menu'),
+        const MaterialPage(
+          key: ValueKey('Search Terrain Menu'),
           child: Scaffold(body: SearchTerrainsScreen()),
         ),
         if (menuType == "Meus Anúncios")
-          MaterialPage(
-              key: const ValueKey('My Terrains Menu'),
+          const MaterialPage(
+              key: ValueKey('My Terrains Menu'),
               child: Scaffold(
                 body: MyTerrainsScreen(),
               ))
         else if (menuType == "Anúncios Favoritos")
-          MaterialPage(
-              key: const ValueKey('My Favorites Terrains'),
+          const MaterialPage(
+              key: ValueKey('My Favorites Terrains'),
               child: Scaffold(
                 body: FavoritesTerrainsScreen(),
               ))

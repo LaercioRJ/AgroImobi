@@ -38,7 +38,7 @@ class DrawerMenu extends StatelessWidget {
             title: const Text('Meu Perfil'),
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => MyProfileScreen()));
+                  MaterialPageRoute(builder: (context) => const MyProfileScreen()));
             },
           ),
           const ListTile(
