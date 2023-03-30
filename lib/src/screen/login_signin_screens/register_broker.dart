@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 import '../../widgets/go_back_link_button.dart';
+import '../../widgets/submit_button.dart';
 
 class RegisterBrokerScreen extends StatelessWidget {
-  const RegisterBrokerScreen({super.key});
+  RegisterBrokerScreen({super.key});
+  final _formKey = GlobalKey<FormState>();
+  final cellphoneMask = MaskTextInputFormatter(
+    mask: '(##) #####-####', 
+    filter: { "#": RegExp(r'[0-9]') },
+    type: MaskAutoCompletionType.lazy
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -25,48 +33,54 @@ class RegisterBrokerScreen extends StatelessWidget {
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
                     child: Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 1, 20, 1),
-                        child: Column(children: [
-                          const TextField(
-                              decoration: InputDecoration(
+                      padding: const EdgeInsets.fromLTRB(20, 1, 20, 1),
+                        child:
+                          Form(
+                            key: _formKey,
+                            child: Column(children: [
+                              TextFormField(
+                                decoration: const  InputDecoration(
                                   labelText: 'Nome Completo',
                                   border: UnderlineInputBorder())),
-                          const TextField(
-                              decoration: InputDecoration(
-                            labelText: 'Email',
-                            border: UnderlineInputBorder(),
-                          )),
-                          const TextField(
-                              decoration: InputDecoration(
-                            labelText: 'Nome de Usuário',
-                            border: UnderlineInputBorder(),
-                          )),
-                          const TextField(
-                              obscureText: true,
-                              decoration: InputDecoration(
-                                labelText: 'Criar Senha',
-                                border: UnderlineInputBorder(),
-                              )),
-                          const TextField(
-                              obscureText: true,
-                              decoration: InputDecoration(
-                                labelText: 'Confirme a Senha',
-                                border: UnderlineInputBorder(),
-                              )),
-                          const TextField(
-                              decoration: InputDecoration(
-                            labelText: 'Telefone Celular',
-                            border: UnderlineInputBorder(),
-                          )),
-                          const TextField(
-                              decoration: InputDecoration(
-                            labelText: 'CRECI',
-                            border: UnderlineInputBorder(),
-                          )),
-                          /*LoginButtons(
-                              title: 'Cadastrar',
-                              pressedFunction: () => print('teste')),*/
-                          const GoBackLinkButton(linkText: 'Já possuo cadastro')
-                        ]))))));
+                              TextFormField(
+                                decoration: const InputDecoration(
+                                  labelText: 'Email',
+                                  border: UnderlineInputBorder(),
+                                )),
+                              TextFormField(
+                                decoration: const InputDecoration(
+                                  labelText: 'Nome de Usuário',
+                                  border: UnderlineInputBorder(),
+                                )),
+                              TextFormField(
+                                obscureText: true,
+                                decoration: const InputDecoration(
+                                  labelText: 'Criar Senha',
+                                  border: UnderlineInputBorder(),
+                                )),
+                              TextFormField(
+                                obscureText: true,
+                                decoration: const InputDecoration(
+                                  labelText: 'Confirme a Senha',
+                                  border: UnderlineInputBorder(),
+                                )),
+                              TextFormField(
+                                decoration: const InputDecoration(
+                                  labelText: 'Telefone Celular',
+                                  border: UnderlineInputBorder(),
+                                ),
+                                inputFormatters: [cellphoneMask],),
+                              TextFormField(
+                                decoration: const InputDecoration(
+                                  labelText: 'CRECI',
+                                  border: UnderlineInputBorder(),
+                                )),
+                              SubmitButton(
+                                title: "Cadastrar",
+                                pressedFunction: () => print('teste'),
+                                formKey: _formKey),
+                              const GoBackLinkButton(linkText: 'Já possuo cadastro')
+                        ])
+                          ) )))));
   }
 }
