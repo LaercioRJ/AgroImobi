@@ -14,8 +14,8 @@ class MenusNavigator extends StatelessWidget {
     return Scaffold(
         body: Navigator(
       pages: [
-        const MaterialPage(
-          key: ValueKey('Search Terrain Menu'),
+        MaterialPage(
+          key: const ValueKey('Search Terrain Menu'),
           child: Scaffold(body: SearchTerrainsScreen()),
         ),
         if (menuType == "Meus Anúncios")
