@@ -5,6 +5,10 @@ class FavoritesTerrainsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: Text('Favorite Terrains Screen'));
+
+    return const Scaffold(
+      backgroundColor: Color.fromARGB(255, 230, 230, 230),
+      body: Text('Favorites Screen'),
+    );
   }
 }
