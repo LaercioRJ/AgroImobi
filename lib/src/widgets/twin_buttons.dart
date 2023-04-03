@@ -31,7 +31,7 @@ class TwinButtonsState extends State<TwinButtons> {
             })
           },
           style: OutlinedButton.styleFrom(
-            backgroundColor: widget.rightActivated ? Colors.grey.shade100 : Colors.grey.shade300,
+            backgroundColor: widget.rightActivated ? Colors.grey.shade300 : Colors.grey.shade100,
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(17),
@@ -50,7 +50,7 @@ class TwinButtonsState extends State<TwinButtons> {
             })
           },
           style: OutlinedButton.styleFrom(
-            backgroundColor: widget.rightActivated ? Colors.grey.shade300 : Colors.grey.shade100,
+            backgroundColor: widget.rightActivated ? Colors.grey.shade100 : Colors.grey.shade300,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.zero,
