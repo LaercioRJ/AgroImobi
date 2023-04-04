@@ -28,6 +28,8 @@ class LoginScreenState extends State<LoginScreen> {
   late String email;
   late String senha;
 
+  final Color _mainColor = const Color(0xFF1C9F23);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +39,7 @@ class LoginScreenState extends State<LoginScreen> {
       decoration: const BoxDecoration(
         image: DecorationImage(
             image: AssetImage("lib/src/assets/planoFundo.jpg"),
-            fit: BoxFit.fill),
+            fit: BoxFit.cover),
       ),
       child: Center(
           child: Container(
@@ -45,14 +47,22 @@ class LoginScreenState extends State<LoginScreen> {
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(20)),
         ),
-        width: MediaQuery.of(context).size.width * 0.8,
-        height: MediaQuery.of(context).size.width * 0.9,
+        width: MediaQuery.of(context).size.width * 0.55,
+        height: MediaQuery.of(context).size.height * 0.55,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 1, 20, 1),
           child: Form(
               key: _formKey,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Text(
+                    'Login',
+                    style: TextStyle(
+                        color: _mainColor,
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold),
+                  ),
                   TextFormField(
                       validator: (value) {
                         if (value == null || value.isEmpty) {
