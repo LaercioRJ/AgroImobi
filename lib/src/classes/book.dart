@@ -1,4 +1,3 @@
-
 class Book {
   final String title;
   final String author;
