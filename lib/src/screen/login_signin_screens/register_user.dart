@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../classes/user.dart';
 import '../../widgets/go_back_link_button.dart';
 import '../../widgets/submit_button.dart';
 
@@ -9,6 +10,11 @@ class RegisterUserScreen extends StatelessWidget {
   final TextEditingController passwordController = TextEditingController();
   final RegExp emailValidator =
       RegExp("([A-Z | a-z | 0-9]+)@([A-Z | a-z | 0-9]+).com");
+
+  User? userModel;
+  late String nome;
+  late String email;
+  late String senha;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +48,7 @@ class RegisterUserScreen extends StatelessWidget {
                       if (value == null || value.isEmpty) {
                         return "Por favor, preencha este campo";
                       }
+                      nome = value;
                       return null;
                     },
                   ),
@@ -56,17 +63,7 @@ class RegisterUserScreen extends StatelessWidget {
                           return "Este é um formato inválido de e-mail.";
                         }
                       }
-                      return null;
-                    },
-                  ),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                        labelText: 'Nome de Usuário',
-                        border: UnderlineInputBorder()),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Por favor, preencha este campo";
-                      }
+                      email = value;
                       return null;
                     },
                   ),
@@ -80,6 +77,7 @@ class RegisterUserScreen extends StatelessWidget {
                       if (value == null || value.isEmpty) {
                         return "Por favor, preencha este campo";
                       }
+                      senha = value;
                       return null;
                     },
                   ),
@@ -101,7 +99,9 @@ class RegisterUserScreen extends StatelessWidget {
                   ),
                   SubmitButton(
                     title: 'Cadastrar',
-                    pressedFunction: () => print('teste'),
+                    pressedFunction: () {
+                      User().toJson(nome, email, senha);
+                    },
                     formKey: _formKey,
                   ),
                   const GoBackLinkButton(linkText: 'Já possuo cadastro')

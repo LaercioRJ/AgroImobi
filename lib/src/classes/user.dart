@@ -1,17 +1,18 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-class Login {
-  toJson(String email, String password) {
-    Map<String, dynamic> loginMap = {
+class User {
+  void toJson(String nome, String email, String password) {
+    Map<String, dynamic> UserMap = {
+      'nome': nome,
       'email': email,
       'password': password,
     };
-    String loginJson = jsonEncode(loginMap);
-    sendJson(loginJson);
+    String UserJson = jsonEncode(UserMap);
+    sendJson(UserJson);
   }
 
-  Future sendJson(String json) async {
+  Future<void> sendJson(String json) async {
     try {
       print(json);
       /*final result = await http.post(Uri.parse('url da api'), body: json);

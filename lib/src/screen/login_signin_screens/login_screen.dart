@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:helloworld/src/classes/login.dart';
 
 import '../../widgets/submit_button.dart';
 import '../../widgets/link_button.dart';
 
 import 'register_user.dart';
 import 'register_broker.dart';
+import 'dart:convert';
 
 class LoginScreen extends StatefulWidget {
   final VoidCallback onTapped;
@@ -19,12 +21,17 @@ class LoginScreen extends StatefulWidget {
 
 class LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  RegExp emailValidator = RegExp("([A-Z | a-z | 0-9]+)@([A-Z | a-z | 0-9]+).com");
+  RegExp emailValidator =
+      RegExp("([A-Z | a-z | 0-9]+)@([A-Z | a-z | 0-9]+).com");
+
+  Login? loginModel;
+  late String email;
+  late String senha;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+        body: Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       decoration: const BoxDecoration(
@@ -55,6 +62,7 @@ class LoginScreenState extends State<LoginScreen> {
                             return "Este é um formato inválido de e-mail.";
                           }
                         }
+                        email = value;
                         return null;
                       },
                       decoration: const InputDecoration(
@@ -65,6 +73,7 @@ class LoginScreenState extends State<LoginScreen> {
                         if (value == null || value.isEmpty) {
                           return 'Por favor, preencha este campo';
                         }
+                        senha = value;
                         return null;
                       },
                       obscureText: true,
@@ -74,15 +83,18 @@ class LoginScreenState extends State<LoginScreen> {
                       )),
                   SubmitButton(
                     title: 'Entrar',
-                    pressedFunction: widget.onTapped,
+                    pressedFunction: () {
+                      Login().toJson(email, senha);
+                    },
+                    //pressedFunction: widget.onTapped,
                     formKey: _formKey,
                   ),
                   LinkButton(
-                    linkText: 'Primeiro Acesso',
-                    linkedPage: RegisterUserScreen()),
+                      linkText: 'Primeiro Acesso',
+                      linkedPage: RegisterUserScreen()),
                   LinkButton(
-                    linkText: 'Primeiro Acesso CORRETOR',
-                    linkedPage: RegisterBrokerScreen())
+                      linkText: 'Primeiro Acesso CORRETOR',
+                      linkedPage: RegisterBrokerScreen())
                 ],
               )),
         ),

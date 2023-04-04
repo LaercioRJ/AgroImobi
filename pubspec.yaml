@@ -14,16 +14,20 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.17.0 <3.0.0"
+  sdk: ">=2.19.6 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   mask_text_input_formatter: ^2.4.0
+  json_annotation: ^4.8.0
+  http: ^0.13.5
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  build_runner: ^2.3.3
+  json_serializable: ^6.6.1
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

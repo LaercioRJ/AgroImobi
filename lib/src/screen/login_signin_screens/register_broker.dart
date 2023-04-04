@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
-import '../../routing/Dropdown.dart';
+import '../../classes/broker.dart';
+import '../../widgets/Dropdown.dart';
 import '../../widgets/go_back_link_button.dart';
 import '../../widgets/submit_button.dart';
 
@@ -15,6 +16,13 @@ class RegisterBrokerScreen extends StatelessWidget {
   final TextEditingController passwordController = TextEditingController();
   final RegExp emailValidator =
       RegExp("([A-Z | a-z | 0-9]+)@([A-Z | a-z | 0-9]+).com");
+
+  Broker? userModel;
+  late String nome;
+  late String email;
+  late String senha;
+  TextEditingController telefone = TextEditingController();
+  late String CRECI = "123456";
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +53,9 @@ class RegisterBrokerScreen extends StatelessWidget {
                                     labelText: 'Nome Completo',
                                     border: UnderlineInputBorder()),
                                 validator: (value) {
+                                  if (value != null) {
+                                    nome = value;
+                                  }
                                   if (value == null || value.isEmpty) {
                                     return "Por favor, preencha este campo";
                                   }
@@ -57,6 +68,9 @@ class RegisterBrokerScreen extends StatelessWidget {
                                   border: UnderlineInputBorder(),
                                 ),
                                 validator: (value) {
+                                  if (value != null) {
+                                    email = value;
+                                  }
                                   if (value == null || value.isEmpty) {
                                     return 'Por favor, preencha este campo';
                                   } else {
@@ -74,6 +88,9 @@ class RegisterBrokerScreen extends StatelessWidget {
                                   border: UnderlineInputBorder(),
                                 ),
                                 validator: (value) {
+                                  if (value != null) {
+                                    senha = value;
+                                  }
                                   if (value == null || value.isEmpty) {
                                     return "Por favor, preencha este campo";
                                   }
@@ -90,7 +107,7 @@ class RegisterBrokerScreen extends StatelessWidget {
                                   if (value == null || value.isEmpty) {
                                     return "Por favor, preencha este campo";
                                   } else {
-                                    if (value != passwordController.text) {
+                                    if (value != senha) {
                                       return "Os campos de senha não são equivalentes.";
                                     }
                                   }
@@ -103,6 +120,7 @@ class RegisterBrokerScreen extends StatelessWidget {
                                   border: UnderlineInputBorder(),
                                 ),
                                 inputFormatters: [cellphoneMask],
+                                controller: telefone,
                               ),
                               TextFormField(
                                   decoration: const InputDecoration(
@@ -119,7 +137,10 @@ class RegisterBrokerScreen extends StatelessWidget {
                               ),
                               SubmitButton(
                                   title: "Cadastrar",
-                                  pressedFunction: () => print('teste'),
+                                  pressedFunction: () {
+                                    Broker().toJson(nome, email, senha,
+                                        telefone.text, CRECI);
+                                  },
                                   formKey: _formKey),
                               const GoBackLinkButton(
                                   linkText: 'Já possuo cadastro')
