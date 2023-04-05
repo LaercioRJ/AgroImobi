@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 const List<String> list = <String>['SP', 'RJ', 'AM', 'PR'];

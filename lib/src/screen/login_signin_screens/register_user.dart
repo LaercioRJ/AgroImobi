@@ -4,6 +4,8 @@ import '../../classes/user.dart';
 import '../../widgets/go_back_link_button.dart';
 import '../../widgets/submit_button.dart';
 
+import '../../server_connection/server_interface.dart';
+
 class RegisterUserScreen extends StatelessWidget {
   RegisterUserScreen({super.key});
   final _formKey = GlobalKey<FormState>();
@@ -12,9 +14,9 @@ class RegisterUserScreen extends StatelessWidget {
       RegExp("([A-Z | a-z | 0-9]+)@([A-Z | a-z | 0-9]+).com");
 
   User? userModel;
-  late String nome;
+  late String name;
   late String email;
-  late String senha;
+  late String password;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +50,7 @@ class RegisterUserScreen extends StatelessWidget {
                       if (value == null || value.isEmpty) {
                         return "Por favor, preencha este campo";
                       }
-                      nome = value;
+                      name = value;
                       return null;
                     },
                   ),
@@ -77,7 +79,7 @@ class RegisterUserScreen extends StatelessWidget {
                       if (value == null || value.isEmpty) {
                         return "Por favor, preencha este campo";
                       }
-                      senha = value;
+                      password = value;
                       return null;
                     },
                   ),
@@ -100,7 +102,10 @@ class RegisterUserScreen extends StatelessWidget {
                   SubmitButton(
                     title: 'Cadastrar',
                     pressedFunction: () {
-                      User().toJson(nome, email, senha);
+                      var user = User(name, email, password);
+                      ServerInterface().registerInformation('okdeokd', user.toJson()).then((result) {
+                        print(result);
+                      });
                     },
                     formKey: _formKey,
                   ),

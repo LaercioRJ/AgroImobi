@@ -1,34 +1,24 @@
 import 'dart:convert';
-import 'package:http/http.dart' as http;
 
 class Broker {
-  void toJson(String nome, String email, String password, String telefone,
-      String CRECI) {
-    Map<String, dynamic> BrokerMap = {
-      'nome': nome,
+
+  String name;
+  String email;
+  String password;
+  String cellphone;
+  String creci;
+
+  Broker(this.name, this.email, this.password, this.cellphone, this.creci);
+
+  toJson() {
+    Map<String, dynamic> brokerMap = {
+      'name': name,
       'email': email,
       'password': password,
-      'telefone': telefone,
-      'CRECI': CRECI,
+      'cellphone': cellphone,
+      'CRECI': creci,
     };
-    String BrokerJson = jsonEncode(BrokerMap);
-    sendJson(BrokerJson);
-  }
-
-  Future<void> sendJson(String json) async {
-    try {
-      print(json);
-      /*final result = await http.post(Uri.parse('url da api'), body: json);
-      if (result.statusCode == 200) {
-        String response = result.body;
-        if (response == 'sucesso') {
-          //aqui chama a rota da segunda tela
-        } else {
-          print('Usuario nao encontrado');
-        }
-      }*/
-    } catch (e) {
-      print(e);
-    }
+    String brokerJson = jsonEncode(brokerMap);
+    return brokerJson;
   }
 }

@@ -6,6 +6,8 @@ import '../../widgets/Dropdown.dart';
 import '../../widgets/go_back_link_button.dart';
 import '../../widgets/submit_button.dart';
 
+import '../../server_connection/server_interface.dart';
+
 class RegisterBrokerScreen extends StatelessWidget {
   RegisterBrokerScreen({super.key});
   final _formKey = GlobalKey<FormState>();
@@ -18,11 +20,11 @@ class RegisterBrokerScreen extends StatelessWidget {
       RegExp("([A-Z | a-z | 0-9]+)@([A-Z | a-z | 0-9]+).com");
 
   Broker? userModel;
-  late String nome;
+  late String name;
   late String email;
-  late String senha;
-  TextEditingController telefone = TextEditingController();
-  late String CRECI = "123456";
+  late String password;
+  TextEditingController cellphone = TextEditingController();
+  late String creci = "123456";
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +56,7 @@ class RegisterBrokerScreen extends StatelessWidget {
                                     border: UnderlineInputBorder()),
                                 validator: (value) {
                                   if (value != null) {
-                                    nome = value;
+                                    name = value;
                                   }
                                   if (value == null || value.isEmpty) {
                                     return "Por favor, preencha este campo";
@@ -89,7 +91,7 @@ class RegisterBrokerScreen extends StatelessWidget {
                                 ),
                                 validator: (value) {
                                   if (value != null) {
-                                    senha = value;
+                                    password = value;
                                   }
                                   if (value == null || value.isEmpty) {
                                     return "Por favor, preencha este campo";
@@ -107,7 +109,7 @@ class RegisterBrokerScreen extends StatelessWidget {
                                   if (value == null || value.isEmpty) {
                                     return "Por favor, preencha este campo";
                                   } else {
-                                    if (value != senha) {
+                                    if (value != password) {
                                       return "Os campos de senha não são equivalentes.";
                                     }
                                   }
@@ -120,7 +122,7 @@ class RegisterBrokerScreen extends StatelessWidget {
                                   border: UnderlineInputBorder(),
                                 ),
                                 inputFormatters: [cellphoneMask],
-                                controller: telefone,
+                                controller: cellphone,
                               ),
                               TextFormField(
                                   decoration: const InputDecoration(
@@ -138,8 +140,10 @@ class RegisterBrokerScreen extends StatelessWidget {
                               SubmitButton(
                                   title: "Cadastrar",
                                   pressedFunction: () {
-                                    Broker().toJson(nome, email, senha,
-                                        telefone.text, CRECI);
+                                    var broker = Broker(name, email, password, cellphone.text, creci);
+                                    ServerInterface().registerInformation('jijij', broker.toJson()).then((result) {
+                                      print(result);
+                                    });
                                   },
                                   formKey: _formKey),
                               const GoBackLinkButton(

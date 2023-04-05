@@ -6,7 +6,10 @@ import '../../widgets/link_button.dart';
 
 import 'register_user.dart';
 import 'register_broker.dart';
-import 'dart:convert';
+
+import '../../classes/message_deliver.dart';
+
+import '../../server_connection/server_interface.dart';
 
 class LoginScreen extends StatefulWidget {
   final VoidCallback onTapped;
@@ -83,10 +86,16 @@ class LoginScreenState extends State<LoginScreen> {
                       )),
                   SubmitButton(
                     title: 'Entrar',
-                    pressedFunction: () {
-                      Login().toJson(email, senha);
+                    pressedFunction: () async {
+                      var login = Login(email, senha);
+                      ServerInterface().verifyInformation('dcdc', login.toJson()).then((result) {
+                        if (result) {
+                          widget.onTapped();
+                        } else {
+                          MessageDeliver().showSimpleMessage('Senha ou email incorretos.', context);
+                        }
+                      });
                     },
-                    //pressedFunction: widget.onTapped,
                     formKey: _formKey,
                   ),
                   LinkButton(
