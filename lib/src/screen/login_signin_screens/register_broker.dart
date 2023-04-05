@@ -8,8 +8,6 @@ import '../../widgets/submit_button.dart';
 
 import '../../server_connection/server_interface.dart';
 
-import '../../server_connection/server_interface.dart';
-
 class RegisterBrokerScreen extends StatefulWidget {
   RegisterBrokerScreen({super.key});
 
@@ -32,12 +30,12 @@ class _RegisterBrokerScreenState extends State<RegisterBrokerScreen> {
 
   Broker? userModel;
 
-  late String nome;
+  late String name;
 
   late String email;
-  late String senha;
-  TextEditingController telefone = TextEditingController();
-  late String CRECI = "123456";
+  late String password;
+  TextEditingController cellphone = TextEditingController();
+  late String creci = "123456";
 
   @override
   Widget build(BuildContext context) {
