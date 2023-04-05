@@ -8,23 +8,36 @@ import '../../widgets/submit_button.dart';
 
 import '../../server_connection/server_interface.dart';
 
-class RegisterBrokerScreen extends StatelessWidget {
+import '../../server_connection/server_interface.dart';
+
+class RegisterBrokerScreen extends StatefulWidget {
   RegisterBrokerScreen({super.key});
+
+  @override
+  State<RegisterBrokerScreen> createState() => _RegisterBrokerScreenState();
+}
+
+class _RegisterBrokerScreenState extends State<RegisterBrokerScreen> {
   final _formKey = GlobalKey<FormState>();
+
   final cellphoneMask = MaskTextInputFormatter(
       mask: '(##) #####-####',
       filter: {"#": RegExp(r'[0-9]')},
       type: MaskAutoCompletionType.lazy);
+
   final TextEditingController passwordController = TextEditingController();
+
   final RegExp emailValidator =
       RegExp("([A-Z | a-z | 0-9]+)@([A-Z | a-z | 0-9]+).com");
 
   Broker? userModel;
-  late String name;
+
+  late String nome;
+
   late String email;
-  late String password;
-  TextEditingController cellphone = TextEditingController();
-  late String creci = "123456";
+  late String senha;
+  TextEditingController telefone = TextEditingController();
+  late String CRECI = "123456";
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +48,12 @@ class RegisterBrokerScreen extends StatelessWidget {
             decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage("lib/src/assets/planoFundo.jpg"),
-                  fit: BoxFit.fill),
+                  fit: BoxFit.cover),
             ),
             child: Center(
                 child: Container(
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    height: MediaQuery.of(context).size.width * 1.3,
+                    width: MediaQuery.of(context).size.width * 0.55,
+                    height: MediaQuery.of(context).size.height * 0.8,
                     decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(20)),
