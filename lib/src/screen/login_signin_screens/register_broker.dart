@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 import '../../classes/broker.dart';
-import '../../widgets/Dropdown.dart';
+import '../../widgets/dropdown.dart';
 import '../../widgets/go_back_link_button.dart';
 import '../../widgets/submit_button.dart';
 
 import '../../server_connection/server_interface.dart';
 
 class RegisterBrokerScreen extends StatefulWidget {
-  RegisterBrokerScreen({super.key});
+  const RegisterBrokerScreen({super.key});
 
   @override
   State<RegisterBrokerScreen> createState() => _RegisterBrokerScreenState();
@@ -17,25 +17,25 @@ class RegisterBrokerScreen extends StatefulWidget {
 
 class _RegisterBrokerScreenState extends State<RegisterBrokerScreen> {
   final _formKey = GlobalKey<FormState>();
-
   final cellphoneMask = MaskTextInputFormatter(
-      mask: '(##) #####-####',
-      filter: {"#": RegExp(r'[0-9]')},
-      type: MaskAutoCompletionType.lazy);
-
-  final TextEditingController passwordController = TextEditingController();
-
+    mask: '(##) #####-####',
+    filter: {"#": RegExp(r'[0-9]')},
+    type: MaskAutoCompletionType.lazy);
   final RegExp emailValidator =
       RegExp("([A-Z | a-z | 0-9]+)@([A-Z | a-z | 0-9]+).com");
 
   Broker? userModel;
-
   late String name;
-
   late String email;
   late String password;
   TextEditingController cellphone = TextEditingController();
   late String creci = "123456";
+  List<String> statesList = ['SP', 'RJ', 'RS', 'PR', 'MG', 'SC'];
+  String selectedState = '';
+
+  changeSelectedState(String newState) {
+    selectedState = newState;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -144,16 +144,16 @@ class _RegisterBrokerScreenState extends State<RegisterBrokerScreen> {
                                 width: 10,
                                 height: 10,
                               ),
-                              const Align(
+                              Align(
                                 alignment: Alignment.centerLeft,
-                                child: Dropdown(),
+                                child: Dropdown(list: statesList, onSelect: changeSelectedState,),
                               ),
                               SubmitButton(
                                   title: "Cadastrar",
                                   pressedFunction: () {
                                     var broker = Broker(name, email, password, cellphone.text, creci);
                                     ServerInterface().registerInformation('jijij', broker.toJson()).then((result) {
-                                      print(result);
+                                      // what to do after user is registered
                                     });
                                   },
                                   formKey: _formKey),

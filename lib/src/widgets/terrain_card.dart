@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TerrainCard extends StatelessWidget {
-  TerrainCard({super.key});
+  const TerrainCard({super.key});
 
   final double price = 300000.90;
 
