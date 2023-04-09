@@ -104,7 +104,7 @@ class RegisterUserScreen extends StatelessWidget {
                     pressedFunction: () {
                       var user = User(name, email, password);
                       ServerInterface().registerInformation('okdeokd', user.toJson()).then((result) {
-                        print(result);
+
                       });
                     },
                     formKey: _formKey,

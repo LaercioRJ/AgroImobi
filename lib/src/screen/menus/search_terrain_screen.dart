@@ -33,7 +33,7 @@ class SearchTerrainsScreen extends StatelessWidget {
               child: Wrap(
                 children: [
                   for (var i in text)
-                    TerrainCard()
+                    const TerrainCard()
                 ],
               ),
             ),

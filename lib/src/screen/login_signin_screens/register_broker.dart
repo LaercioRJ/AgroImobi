@@ -23,8 +23,6 @@ class _RegisterBrokerScreenState extends State<RegisterBrokerScreen> {
     type: MaskAutoCompletionType.lazy);
   final RegExp emailValidator =
       RegExp("([A-Z | a-z | 0-9]+)@([A-Z | a-z | 0-9]+).com");
-
-  Broker? userModel;
   late String name;
   late String email;
   late String password;

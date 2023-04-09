@@ -1,54 +1,74 @@
 class AgroNpRoutePath {
-  final int userId;
   final int terrainId;
-  final int myTerrainId;
   final bool isUnknown;
   final String menuType;
+  final bool isLogged;
 
   AgroNpRoutePath.login()
-      : userId = -1,
-        terrainId = -1,
-        myTerrainId = -1,
-        isUnknown = false,
-        menuType = "";
-
-  AgroNpRoutePath.home()
-      : userId = -1,
-        terrainId = -1,
-        myTerrainId = -1,
-        isUnknown = false,
-        menuType = "publicTerrains";
-
-  /*AgroNpRoutePath.myTerrainDetails(this.myTerrainId)
-      : userId = -1;
-        terrainId = -1,
-        menuType = "myterrains",
-        isUnknown = false;*/
-
-  AgroNpRoutePath.terrainDetails(this.terrainId)
-      : userId = -1,
-        isUnknown = false,
-        myTerrainId = -1,
-        menuType = "";
-
-  AgroNpRoutePath.myProfile(this.userId)
       : terrainId = -1,
         isUnknown = false,
-        menuType = "",
-        myTerrainId = -1;
+        menuType = "Procurar Anúncios",
+        isLogged = false;
+
+  AgroNpRoutePath.myprofile()
+      : terrainId = -1,
+        isUnknown = false,
+        menuType = "Meu Perfil",
+        isLogged = true;
+
+  AgroNpRoutePath.searchTerrains()
+      : terrainId = -1,
+        isUnknown = false,
+        menuType = "Procurar Anúncios",
+        isLogged = true;
+
+  AgroNpRoutePath.visualizePublicTerrain(this.terrainId)
+      : isUnknown = false,
+        menuType = "Procurar Anúncios",
+        isLogged = true;
+
+  AgroNpRoutePath.myTerrains()
+      : terrainId = -1,
+        isUnknown = false,
+        menuType = "Meus Anúncios",
+        isLogged = true;
+
+  AgroNpRoutePath.viusualizePrivateTerrain(this.terrainId)
+      : isUnknown = false,
+        menuType = "Meus Anúncios",
+        isLogged = true;
+
+  AgroNpRoutePath.myFavorites()
+    : terrainId = -1,
+      isUnknown = false,
+      menuType = "Anúncios Favoritos",
+      isLogged = true;
+
+  AgroNpRoutePath.visualizeFavoriteTerrain(this.terrainId)
+    : isUnknown = false,
+      menuType = "Anúncios Favoritos",
+      isLogged = true;
 
   AgroNpRoutePath.unknown()
-      : userId = -1,
-        terrainId = -1,
+      : terrainId = -1,
         menuType = "",
-        myTerrainId = -1,
+        isLogged = true,
         isUnknown = true;
 
-  bool get isLoginPage => (userId == -1 && terrainId == -1);
+  bool get isLoginPage => (terrainId == -1 && menuType == "" && !isUnknown && !isLogged);
 
-  bool get isHomePage => (userId == -1 && terrainId == -1);
+  bool get isMyProfile => (terrainId == -1 && menuType == "myProfile" && !isUnknown && isLogged);
 
-  bool get isTerrainDetailsPage => (userId == -1 && terrainId != -1);
+  bool get isSearchTerrains => (terrainId == -1 && menuType == "searchTerrains" && !isUnknown && isLogged);
+  
+  bool get isViewPublicTerrain => (terrainId != -1 && menuType == "searchTerrains" && !isUnknown && isLogged);
 
-  bool get isMyProfilePage => (userId != -1 && terrainId == -1);
+  bool get isMyTerrains => (terrainId == -1 && menuType == "myTerrains" && !isUnknown && isLogged);
+
+  bool get isViewPrivateTerrain => (terrainId != -1 && menuType == "myTerrains" && !isUnknown && isLogged);
+
+  bool get isMyFavorites => (terrainId == -1 && menuType == "myFavorites" && !isUnknown && isLogged);
+
+  bool get isViewFavoriteTerrain => (terrainId != -1 && menuType == "myFavorites" && !isUnknown && isLogged);
+
 }

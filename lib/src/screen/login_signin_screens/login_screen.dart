@@ -111,7 +111,7 @@ class LoginScreenState extends State<LoginScreen> {
                   LinkButton(
                       linkText: 'Primeiro Acesso',
                       linkedPage: RegisterUserScreen()),
-                  LinkButton(
+                  const LinkButton(
                       linkText: 'Primeiro Acesso CORRETOR',
                       linkedPage: RegisterBrokerScreen())
                 ],

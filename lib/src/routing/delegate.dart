@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:helloworld/src/screen/terrain_visualization.dart';
 
 import 'route_path.dart';
-import '../screen/drawer_menu.dart';
+import '../screen/menus/drawer_menu.dart';
 import '../screen/login_signin_screens/login_screen.dart';
 import '../screen/menus_navigator.dart';
 
@@ -13,26 +14,48 @@ class AppRouterDelegate extends RouterDelegate<AgroNpRoutePath>
 
   AppRouterDelegate({required this.navigatorKey});
 
-  bool show404 = false;
-  bool _isLogged = false;
-  int _userId = -1;
-  int _terrainId = -1;
-  String _menuType = "Buscar Anúncios";
+  bool isUnknown = false;
+  bool isLogged = false;
+  int terrainId = -1;
+  String menuType = "Procurar Anúncios";
 
   @override
   AgroNpRoutePath get currentConfiguration {
-    if (show404) {
+    if (isUnknown) {
       return AgroNpRoutePath.unknown();
     }
 
-    if (_isLogged && _terrainId == -1 && _userId == -1) {
-      return AgroNpRoutePath.home();
+    if (!isLogged) {
+      return AgroNpRoutePath.login();
+    } else {
+      switch (menuType) {
+        case "Procurar Anúncios":
+          if (terrainId == -1) {
+            return AgroNpRoutePath.searchTerrains();
+          } else {
+            return AgroNpRoutePath.visualizePublicTerrain(terrainId);
+          }
+        
+        case "Meus Anúncios":
+          if (terrainId == -1) {
+            return AgroNpRoutePath.myTerrains();
+          } else {
+            return AgroNpRoutePath.viusualizePrivateTerrain(terrainId);
+          }
+        
+        case "Anúncios Favoritos":
+          if (terrainId == -1) {
+            return AgroNpRoutePath.myFavorites();
+          } else {
+            return AgroNpRoutePath.visualizeFavoriteTerrain(terrainId);
+          }
+
+        case "Meu Perfil":
+          return AgroNpRoutePath.myprofile();
+      }
     }
 
     return AgroNpRoutePath.unknown();
-    /*return _isSelected == false
-        ? AgroNpRoutePath.home()
-        : AgroNpRoutePath.details(books.indexOf(_selectedBook));*/
   }
 
   @override
@@ -41,34 +64,31 @@ class AppRouterDelegate extends RouterDelegate<AgroNpRoutePath>
       key: navigatorKey,
       pages: [
         MaterialPage(
-            key: const ValueKey('Terrains Menus'),
-            child: Scaffold(
-                key: scaffoldKey,
-                appBar: AppBar(
-                  title: Text(_menuType),
-                ),
-                drawer: DrawerMenu(changeScreen: _visualizeMyTerrains),
-                body: MenusNavigator(menuType: _menuType))),
-        if (!_isLogged)
+          key: const ValueKey('Terrains Menus'),
+          child: Scaffold(
+            key: scaffoldKey,
+            appBar: AppBar(
+              title: Text(menuType),
+            ),
+            drawer: DrawerMenu(changeScreen: _changeSelectedMenu),
+            body: MenusNavigator(menuType: menuType, selectTerrain: _selectTerrain))),
+        if (!isLogged)
           MaterialPage(
-              key: const ValueKey('Login Screen'),
-              child: LoginScreen(
-                onTapped: _logIn,
-              ))
-        /*else if (_userId != -1)
+            key: const ValueKey('Login Screen'),
+            child: LoginScreen(
+              onTapped: _logIn,
+            )),
+        if (terrainId != -1)
           const MaterialPage(
-              key: ValueKey('My Profile Screen'), child: Text(''))*/
-        /*if (show404)
-          MaterialPage(
-              key: const ValueKey('UnknownPage'), child: UnknownScreen())
-        else if (_isSelected)
-          BookDetailsPage(book: _selectedBook)*/
+            key: ValueKey('Terrain Screen'),
+            child: TerrainVisualization()
+          )
       ],
       onPopPage: (route, result) {
         if (!route.didPop(result)) {
           return false;
         }
-        show404 = false;
+        isUnknown = false;
         notifyListeners();
         return true;
       },
@@ -77,51 +97,86 @@ class AppRouterDelegate extends RouterDelegate<AgroNpRoutePath>
 
   @override
   Future<void> setNewRoutePath(AgroNpRoutePath configuration) async {
+    isUnknown = true;
+
     if (configuration.isUnknown) {
-      show404 = true;
+      isUnknown = true;
       return;
     }
 
-    if (configuration.isHomePage) {
-      _isLogged = true;
-      _userId = -1;
-      _terrainId = -1;
-      show404 = false;
-    }
-
     if (configuration.isLoginPage) {
-      _isLogged = false;
-      _userId = -1;
-      _terrainId = -1;
-      show404 = false;
+      isLogged = false;
+      terrainId = -1;
+      isUnknown = false;
+      menuType = "Procurar Anúncios";
     }
 
-    /*if (path.isDetailsPage) {
-      if (path.id < 0 || path.id > books.length - 1) {
-        show404 = true;
-        return;
-      }
+    if (configuration.isSearchTerrains) {
+      isLogged = true;
+      terrainId = -1;
+      isUnknown = false;
+      menuType = configuration.menuType;
+    }
 
-      _selectedBook = books[path.id];
-    } else {
-      _isSelected = false;
-    }*/
+    if (configuration.isViewPublicTerrain) {
+      isLogged = true;
+      isUnknown = false;
+      menuType = configuration.menuType;
+      terrainId = configuration.terrainId;
+    }
 
-    show404 = false;
+    if (configuration.isMyFavorites) {
+      isLogged = true;
+      isUnknown = false;
+      menuType = configuration.menuType;
+      terrainId = -1;
+    }
+
+    if (configuration.isViewFavoriteTerrain) {
+      isLogged = true;
+      isUnknown = false;
+      menuType = configuration.menuType;
+      terrainId = configuration.terrainId;
+    }
+
+    if (configuration.isMyTerrains) {
+      isLogged = true;
+      isUnknown = false;
+      menuType = configuration.menuType;
+      terrainId = -1;
+    }
+
+    if (configuration.isViewPrivateTerrain) {
+      isLogged = true;
+      isUnknown = false;
+      menuType = configuration.menuType;
+      terrainId = configuration.terrainId;
+    }
+
+    if (configuration.isMyProfile) {
+      isLogged = true;
+      isUnknown = false;
+      menuType = configuration.menuType;
+      terrainId = configuration.terrainId;
+    }
   }
 
   void _logIn() {
-    _isLogged = true;
+    isLogged = true;
     notifyListeners();
   }
 
-  void _visualizeMyTerrains(String menuOption) {
-    if (menuOption != _menuType) {
-      _menuType = menuOption;
+  void _changeSelectedMenu(String menuOption) {
+    if (menuOption != menuType) {
+      menuType = menuOption;
       notifyListeners();
       if (scaffoldKey.currentState!.hasDrawer) {
         scaffoldKey.currentState!.closeDrawer();
       }
     }
+  }
+
+  void _selectTerrain(int newId) {
+    terrainId = newId;
   }
 }

@@ -11,7 +11,7 @@ class AgroNpInformationParser extends RouteInformationParser<AgroNpRoutePath> {
     String routeName;
 
     if (uri.pathSegments.isEmpty) {
-      return AgroNpRoutePath.home();
+      return AgroNpRoutePath.unknown();
     }
 
     if (uri.pathSegments.length == 1) {
@@ -21,6 +21,26 @@ class AgroNpInformationParser extends RouteInformationParser<AgroNpRoutePath> {
         case "login":
           {
             return AgroNpRoutePath.login();
+          }
+
+        case "myprofile":
+          {
+            return AgroNpRoutePath.myprofile();
+          }
+        
+        case "myterrains":
+          {
+            return AgroNpRoutePath.myTerrains();
+          }
+
+        case "searchterrains":
+          {
+            return AgroNpRoutePath.searchTerrains();
+          }
+
+        case "favorites":
+          {
+            return AgroNpRoutePath.myFavorites();
           }
       }
 
@@ -37,16 +57,21 @@ class AgroNpInformationParser extends RouteInformationParser<AgroNpRoutePath> {
       }
 
       switch (remaining) {
-        case 'terrain':
+
+        case "myterrains":
           {
-            return AgroNpRoutePath.terrainDetails(id);
+            return AgroNpRoutePath.viusualizePrivateTerrain(id);
           }
 
-        case 'user':
+        case "searchterrains":
           {
-            return AgroNpRoutePath.myProfile(id);
+            return AgroNpRoutePath.visualizePublicTerrain(id);
           }
 
+        case "favorites":
+          {
+            return AgroNpRoutePath.visualizeFavoriteTerrain(id);
+          }
         default:
           {
             return AgroNpRoutePath.unknown();
@@ -59,20 +84,32 @@ class AgroNpInformationParser extends RouteInformationParser<AgroNpRoutePath> {
 
   @override
   RouteInformation restoreRouteInformation(AgroNpRoutePath configuration) {
-    if (configuration.isHomePage) {
-      return const RouteInformation(location: '/');
+    if (configuration.isSearchTerrains) {
+      return const RouteInformation(location: '/searchterrain');
     }
 
-    if (configuration.isLoginPage) {
-      return const RouteInformation(location: '/login');
+    if (configuration.isViewPublicTerrain) {
+      return RouteInformation(location: '/searchterrain/${configuration.terrainId}');
     }
 
-    if (configuration.isTerrainDetailsPage) {
-      return RouteInformation(location: '/terrain/${configuration.terrainId}');
+    if (configuration.isMyProfile) {
+      return const RouteInformation(location: '/myProfile');
     }
 
-    if (configuration.isMyProfilePage) {
-      return RouteInformation(location: '/myProfile/${configuration.userId}');
+    if (configuration.isMyFavorites) {
+      return const RouteInformation(location: '/myfavorites');
+    }
+
+    if (configuration.isViewFavoriteTerrain) {
+      return RouteInformation(location: '/myfavorites/${configuration.terrainId}');
+    }
+
+    if (configuration.isMyTerrains) {
+      return const RouteInformation(location: '/myterrains');
+    }
+
+    if (configuration.isViewPrivateTerrain) {
+      return RouteInformation(location: '/myterrains/${configuration.terrainId}');
     }
 
     return const RouteInformation(location: '/404');
