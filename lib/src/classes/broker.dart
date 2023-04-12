@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 class Broker {
-
   String name;
   String email;
   String password;
