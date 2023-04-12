@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:helloworld/src/screen/terrain_visualization.dart';
 
 import 'route_path.dart';
 import '../screen/menus/drawer_menu.dart';
 import '../screen/login_signin_screens/login_screen.dart';
-import '../screen/menus_navigator.dart';
+import '../screen/menus/menus_navigator.dart';
+import '../screen/terrain_crud/creating_terrain.dart';
+
+import '../screen/terrain_crud/visualize_terrain.dart';
 
 class AppRouterDelegate extends RouterDelegate<AgroNpRoutePath>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin<AgroNpRoutePath> {
@@ -18,13 +20,13 @@ class AppRouterDelegate extends RouterDelegate<AgroNpRoutePath>
   bool isLogged = false;
   int terrainId = -1;
   String menuType = "Procurar Anúncios";
+  String action = "Visualizar";
 
   @override
   AgroNpRoutePath get currentConfiguration {
     if (isUnknown) {
       return AgroNpRoutePath.unknown();
     }
-
     if (!isLogged) {
       return AgroNpRoutePath.login();
     } else {
@@ -71,7 +73,7 @@ class AppRouterDelegate extends RouterDelegate<AgroNpRoutePath>
               title: Text(menuType),
             ),
             drawer: DrawerMenu(changeScreen: _changeSelectedMenu),
-            body: MenusNavigator(menuType: menuType, selectTerrain: _selectTerrain))),
+            body: MenusNavigator(menuType: menuType, selectTerrain: _selectTerrain, changeAction: _changeAction))),
         if (!isLogged)
           MaterialPage(
             key: const ValueKey('Login Screen'),
@@ -79,9 +81,14 @@ class AppRouterDelegate extends RouterDelegate<AgroNpRoutePath>
               onTapped: _logIn,
             )),
         if (terrainId != -1)
-          const MaterialPage(
-            key: ValueKey('Terrain Screen'),
-            child: TerrainVisualization()
+          MaterialPage(
+            key: const ValueKey("Visualizar Terreno"),
+            child: VisualizeTerrain(setTerrainId: _selectTerrain)
+          ),
+        if (action == "Criar Anúncio")
+          MaterialPage(
+            key: const ValueKey('Building Terrain'),
+            child: CreatingTerrain(changeAction: _changeAction)
           )
       ],
       onPopPage: (route, result) {
@@ -97,12 +104,6 @@ class AppRouterDelegate extends RouterDelegate<AgroNpRoutePath>
 
   @override
   Future<void> setNewRoutePath(AgroNpRoutePath configuration) async {
-    isUnknown = true;
-
-    if (configuration.isUnknown) {
-      isUnknown = true;
-      return;
-    }
 
     if (configuration.isLoginPage) {
       isLogged = false;
@@ -159,16 +160,23 @@ class AppRouterDelegate extends RouterDelegate<AgroNpRoutePath>
       menuType = configuration.menuType;
       terrainId = configuration.terrainId;
     }
+
+    if (configuration.isUnknown) {
+      isUnknown = true;
+      return;
+    }
   }
 
   void _logIn() {
     isLogged = true;
+    isUnknown = false;
     notifyListeners();
   }
 
   void _changeSelectedMenu(String menuOption) {
     if (menuOption != menuType) {
       menuType = menuOption;
+      terrainId = -1;
       notifyListeners();
       if (scaffoldKey.currentState!.hasDrawer) {
         scaffoldKey.currentState!.closeDrawer();
@@ -178,5 +186,13 @@ class AppRouterDelegate extends RouterDelegate<AgroNpRoutePath>
 
   void _selectTerrain(int newId) {
     terrainId = newId;
+    notifyListeners();
+  }
+
+  void _changeAction(String actionOption) {
+    if (action != actionOption) {
+      action = actionOption;
+      notifyListeners();
+    }
   }
 }

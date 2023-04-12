@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
 
 class MyTerrainsScreen extends StatelessWidget {
-  const MyTerrainsScreen({super.key});
+  final Function changeAction;
+  const MyTerrainsScreen({
+    super.key, 
+    required this.changeAction
+  });
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: Text('My Terrains Screen'));
+    return Scaffold(
+      body: const Text('My Terrains Screen'),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          changeAction("Criar Anúncio");
+        },
+        child: const Icon(Icons.add, size: 30,),
+        backgroundColor: Colors.green,
+      ),
+    );
   }
 }

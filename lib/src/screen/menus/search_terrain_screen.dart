@@ -4,7 +4,11 @@ import '../../widgets/terrain_card.dart';
 import '../../widgets/twin_buttons.dart';
 
 class SearchTerrainsScreen extends StatelessWidget {
-  SearchTerrainsScreen({super.key});
+  final Function selectTerrain;
+  SearchTerrainsScreen({
+    super.key,
+    required this.selectTerrain
+  });
   List<int> text = [1,2,3,4];
   bool rightActivated = true;
 
@@ -33,7 +37,7 @@ class SearchTerrainsScreen extends StatelessWidget {
               child: Wrap(
                 children: [
                   for (var i in text)
-                    const TerrainCard()
+                    TerrainCard(selectTerrain: selectTerrain)
                 ],
               ),
             ),

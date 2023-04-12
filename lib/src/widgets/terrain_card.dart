@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class TerrainCard extends StatelessWidget {
-  const TerrainCard({super.key});
+  final Function selectTerrain;
+  const TerrainCard({
+    super.key,
+    required this.selectTerrain
+  });
 
   final double price = 300000.90;
 
@@ -9,7 +13,11 @@ class TerrainCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.025),
-      child: Container(
+      child: InkWell(
+        onTap: () {
+          selectTerrain(1);
+        },
+        child: Container(
         width: MediaQuery.of(context).size.width * 0.445,
         height: MediaQuery.of(context).size.height * 0.4,
         alignment: Alignment.topCenter,
@@ -59,7 +67,8 @@ class TerrainCard extends StatelessWidget {
               )
             )
           ])
-      ),
+        ),
+      )
     );
   }
 }

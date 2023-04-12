@@ -42,6 +42,11 @@ class AgroNpInformationParser extends RouteInformationParser<AgroNpRoutePath> {
           {
             return AgroNpRoutePath.myFavorites();
           }
+
+        case "buildterrain" :
+          {
+            return AgroNpRoutePath.buildTerrain();
+          }
       }
 
       return AgroNpRoutePath.unknown();
@@ -84,6 +89,15 @@ class AgroNpInformationParser extends RouteInformationParser<AgroNpRoutePath> {
 
   @override
   RouteInformation restoreRouteInformation(AgroNpRoutePath configuration) {
+
+    if (configuration.isLogged) {
+      return const RouteInformation(location: '/login');
+    }
+
+    if (configuration.isBuildTerrain) {
+      return const RouteInformation(location: '/buildterrain');
+    }
+
     if (configuration.isSearchTerrains) {
       return const RouteInformation(location: '/searchterrain');
     }
