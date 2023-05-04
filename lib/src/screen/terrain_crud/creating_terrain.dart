@@ -20,8 +20,12 @@ class CreatingTerrain extends StatelessWidget {
         appBar: AppBar(
            title: const Text('Novo Anúncio')
         ),
-        body: const Center(
-          child: Text('Criar Terrenos')
+        body: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height * 0.33,
+          decoration: const BoxDecoration(
+            color: Colors.green
+          ),
         ),
       )
     );

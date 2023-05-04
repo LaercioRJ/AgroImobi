@@ -38,7 +38,7 @@ class Terrain {
   );
 
   toJson() {
-    Map<String, dynamic> TerrainMap = {
+    Map<String, dynamic> terrainMap = {
       'id': id,
       'valor': valor,
       'areaTotal': areaTotal,
@@ -55,7 +55,7 @@ class Terrain {
       'dataInicio': dataInicio,
       'dataFinal': dataFinal,
     };
-    String terrainJson = jsonEncode(TerrainMap);
+    String terrainJson = jsonEncode(terrainMap);
     return terrainJson;
   }
 }
