@@ -25,7 +25,7 @@ class _SubmitButtonState extends State<SubmitButton> {
         borderRadius: BorderRadius.circular(25),
         child: TextButton(
             style: TextButton.styleFrom(
-                backgroundColor: Colors.blue,
+                backgroundColor: Colors.green,
                 foregroundColor: Colors.white,
                 padding: const EdgeInsets.fromLTRB(70, 18, 70, 18),
                 textStyle: const TextStyle(fontSize: 22)),

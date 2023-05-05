@@ -9,8 +9,8 @@ class SearchTerrainsScreen extends StatelessWidget {
     super.key,
     required this.selectTerrain
   });
-  List<int> text = [1,2,3,4];
-  bool rightActivated = true;
+  final List<int> text = [1,2,3,4];
+  final bool rightActivated = true;
 
   @override
   Widget build(BuildContext context) {

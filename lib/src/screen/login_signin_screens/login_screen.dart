@@ -3,16 +3,14 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:helloworld/src/classes/login.dart';
 
-import '../../widgets/submit_button.dart';
-import '../../widgets/link_button.dart';
+import 'package:helloworld/src/widgets/submit_button.dart';
+import 'package:helloworld/src/widgets/link_button.dart';
 
 import 'register_user.dart';
 import 'register_broker.dart';
 
-import '../../classes/message_deliver.dart';
-
-import '../../server_connection/server_interface.dart';
-import 'package:http/http.dart' as http;
+import 'package:helloworld/src/classes/message_deliver.dart';
+import 'package:helloworld/src/server_connection/server_interface.dart';
 
 class LoginScreen extends StatefulWidget {
   final VoidCallback onTapped;
@@ -34,99 +32,93 @@ class LoginScreenState extends State<LoginScreen> {
   late String email;
   late String senha;
 
-  final Color _mainColor = const Color(0xFF1C9F23);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage("lib/src/assets/planoFundo.jpg"),
-            fit: BoxFit.cover),
-      ),
-      child: Center(
-          child: Container(
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(20)),
-        ),
-        width: MediaQuery.of(context).size.width * 0.55,
-        height: MediaQuery.of(context).size.height * 0.55,
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 1, 20, 1),
-          child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Login',
-                    style: TextStyle(
-                        color: _mainColor,
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold),
+      backgroundColor: Colors.white,
+      body: Form(
+        key: _formKey,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(1, 0, 1, 8),
+              child: Center(
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.35,
+                  height: MediaQuery.of(context).size.width * 0.35,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.lightBlue,
+                    image: DecorationImage(
+                      image: AssetImage("lib/src/assets/pom-pom.png")
+                    )
                   ),
-                  TextFormField(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Por favor, preencha este campo';
-                        } else {
-                          if (!emailValidator.hasMatch(value)) {
-                            return "Este é um formato inválido de e-mail.";
-                          }
-                        }
-                        email = value;
-                        return null;
-                      },
-                      decoration: const InputDecoration(
-                          labelText: 'Usuário',
-                          border: UnderlineInputBorder())),
-                  TextFormField(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Por favor, preencha este campo';
-                        }
-                        senha = value;
-                        return null;
-                      },
-                      obscureText: true,
-                      decoration: const InputDecoration(
-                        labelText: 'Senha',
-                        border: UnderlineInputBorder(),
-                      )),
-                  SubmitButton(
-                    title: 'Entrar',
-                    pressedFunction: () async {
-                      var login = Login(email, senha);
-                      print(login);
-                      print(email + senha);
-                      ServerInterface()
-                          .verifyInformation(
-                              'https://localhost:3000/login/', login.toJson())
-                          .then((result) {
-                        if (result) {
-                          widget.onTapped();
-                        } else {
-                          MessageDeliver().showSimpleMessage(
-                              'Senha ou email incorretos.', context);
-                        }
-                      });
-                    },
-                    formKey: _formKey,
-                  ),
-                  LinkButton(
-                      linkText: 'Primeiro Acesso',
-                      linkedPage: RegisterUserScreen()),
-                  const LinkButton(
-                      linkText: 'Primeiro Acesso CORRETOR',
-                      linkedPage: RegisterBrokerScreen())
-                ],
-              )),
-        ),
-      )),
-    ));
+                ),
+              )
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 5.0),
+              child: TextFormField(
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Por favor, preencha este campo';
+                  } else {
+                    if (!emailValidator.hasMatch(value)) {
+                      return "Este é um formato inválido de e-mail.";
+                    }
+                  }
+                  email = value;
+                  return null;
+                },
+                decoration: const InputDecoration(
+                  icon: Icon(Icons.person),
+                  labelText: 'Usuário',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10))
+                  )
+                )
+              ),
+            ),
+            TextFormField(
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Por favor, preencha este campo';
+                }
+                senha = value;
+                return null;
+              },
+              obscureText: true,
+              decoration: const InputDecoration(
+                icon: Icon(Icons.password),
+                labelText: 'Senha',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10))
+                ),
+            )),
+            SubmitButton(
+              title: 'Entrar',
+              pressedFunction: () async {
+                var login = Login(email, senha);
+                ServerInterface().verifyInformation('dcdc', login.toJson()).then((result) {
+                  if (result) {
+                    widget.onTapped();
+                  } else {
+                    MessageDeliver().showSimpleMessage('Senha ou email incorretos.', context);
+                  }
+                });
+              },
+              formKey: _formKey,
+            ),
+            LinkButton(
+              linkText: 'Primeiro Acesso',
+              linkedPage: RegisterUserScreen()),
+            const LinkButton(
+              linkText: 'Primeiro Acesso CORRETOR',
+              linkedPage: RegisterBrokerScreen())
+          ],
+        )
+      )
+    );
   }
 }

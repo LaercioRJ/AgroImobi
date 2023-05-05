@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'route_path.dart';
 import '../screen/menus/drawer_menu.dart';
-import '../screen/login_signin_screens/login_screen.dart';
+import '../screen/login_signin_screens//login_background.dart';
 import '../screen/menus/menus_navigator.dart';
 import '../screen/terrain_crud/creating_terrain.dart';
 
@@ -76,10 +76,8 @@ class AppRouterDelegate extends RouterDelegate<AgroNpRoutePath>
             body: MenusNavigator(menuType: menuType, selectTerrain: _selectTerrain, changeAction: _changeAction))),
         if (!isLogged)
           MaterialPage(
-            key: const ValueKey('Login Screen'),
-            child: LoginScreen(
-              onTapped: _logIn,
-            )),
+            key: const  ValueKey('Login Screen'),
+            child: LoginBackground(logIntoApp: _logIn,)),
         if (terrainId != -1)
           MaterialPage(
             key: const ValueKey("Visualizar Terreno"),

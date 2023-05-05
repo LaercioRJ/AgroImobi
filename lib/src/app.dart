@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'routing/delegate.dart';
 import 'routing/parser.dart';
 
+import 'classes/custom_scroll_behavior.dart';
+
 class AgroNpApp extends StatefulWidget {
   const AgroNpApp({super.key});
 
@@ -28,6 +30,7 @@ class _AgroNpAppState extends State<AgroNpApp> {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Books App',
+      scrollBehavior: const MyCustomScrollBehavior(),
       routerDelegate: _routerDelegate,
       routeInformationParser: _routeInformationParser,
     );
