@@ -1,7 +1,6 @@
 //import 'package:http/http.dart' as http;
 
 class ServerInterface {
-
   Future<bool> verifyInformation(url, body) async {
     return true;
     /*try {

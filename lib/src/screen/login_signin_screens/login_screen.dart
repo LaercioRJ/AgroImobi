@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:helloworld/src/classes/login.dart';
 
@@ -10,6 +12,7 @@ import 'register_broker.dart';
 import '../../classes/message_deliver.dart';
 
 import '../../server_connection/server_interface.dart';
+import 'package:http/http.dart' as http;
 
 class LoginScreen extends StatefulWidget {
   final VoidCallback onTapped;
@@ -98,11 +101,17 @@ class LoginScreenState extends State<LoginScreen> {
                     title: 'Entrar',
                     pressedFunction: () async {
                       var login = Login(email, senha);
-                      ServerInterface().verifyInformation('dcdc', login.toJson()).then((result) {
+                      print(login);
+                      print(email + senha);
+                      ServerInterface()
+                          .verifyInformation(
+                              'https://localhost:3000/login/', login.toJson())
+                          .then((result) {
                         if (result) {
                           widget.onTapped();
                         } else {
-                          MessageDeliver().showSimpleMessage('Senha ou email incorretos.', context);
+                          MessageDeliver().showSimpleMessage(
+                              'Senha ou email incorretos.', context);
                         }
                       });
                     },
