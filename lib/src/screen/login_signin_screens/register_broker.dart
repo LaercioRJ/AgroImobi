@@ -44,6 +44,18 @@ class _RegisterBrokerScreenState extends State<RegisterBrokerScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const Center(
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(0, 1, 0, 5),
+                child: Text('Seja bem-vindo! Cadastre-se aqui para anunciar no app.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 19, 122, 25),
+                    fontSize: 20,
+                  ),
+                ),
+              ),
+            ),
             TextFormField(
               decoration: const InputDecoration(
                 labelText: 'Nome Completo',
