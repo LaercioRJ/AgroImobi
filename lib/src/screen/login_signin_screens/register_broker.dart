@@ -18,9 +18,9 @@ class RegisterBrokerScreen extends StatefulWidget {
 class _RegisterBrokerScreenState extends State<RegisterBrokerScreen> {
   final _formKey = GlobalKey<FormState>();
   final cellphoneMask = MaskTextInputFormatter(
-    mask: '(##) #####-####',
-    filter: {"#": RegExp(r'[0-9]')},
-    type: MaskAutoCompletionType.lazy);
+      mask: '(##) #####-####',
+      filter: {"#": RegExp(r'[0-9]')},
+      type: MaskAutoCompletionType.lazy);
   final RegExp emailValidator =
       RegExp("([A-Z | a-z | 0-9]+)@([A-Z | a-z | 0-9]+).com");
   late String name;
@@ -38,24 +38,12 @@ class _RegisterBrokerScreenState extends State<RegisterBrokerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 240, 240, 240),
+      backgroundColor: Colors.white,
       body: Form(
         key: _formKey,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Center(
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(0, 1, 0, 5),
-                child: Text('Seja bem-vindo! Cadastre-se aqui para anunciar no app.',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 19, 122, 25),
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-            ),
             TextFormField(
               decoration: const InputDecoration(
                 labelText: 'Nome Completo',
@@ -134,30 +122,32 @@ class _RegisterBrokerScreenState extends State<RegisterBrokerScreen> {
               decoration: const InputDecoration(
                 labelText: 'CRECI',
                 border: UnderlineInputBorder(),
-            )),
-            const SizedBox(
-              width: 10,
-              height: 10,
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Dropdown(list: statesList, onSelect: changeSelectedState,),
-            ),
-            SubmitButton(
-              title: "Cadastrar",
-              pressedFunction: () {
-                var broker = Broker(name, email, password, cellphone.text, creci);
-                ServerInterface().registerInformation('jijij', broker.toJson()).then((result) {
-                  // what to do after user is registered
-                });
-              },
-              formKey: _formKey
-            ),
-            const GoBackLinkButton(
-              linkText: 'Já possuo cadastro')
-          ]
-        )
-      )
-    );
+              )),
+              const SizedBox(
+                width: 10,
+                height: 10,
+              ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Dropdown(
+                  list: statesList,
+                  onSelect: changeSelectedState,
+                ),
+              ),
+              SubmitButton(
+                  title: "Cadastrar",
+                  pressedFunction: () {
+                    var broker =
+                        Broker(name, email, password, cellphone.text, creci);
+                    ServerInterface()
+                        .sendingInformation(
+                            'http://localhost:3000/login', broker.toJson())
+                        .then((result) {
+                      // what to do after user is registered
+                    });
+                  },
+                  formKey: _formKey),
+              const GoBackLinkButton(linkText: 'Já possuo cadastro')
+            ])));
   }
 }
