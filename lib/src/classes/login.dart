@@ -1,17 +1,18 @@
 import 'dart:convert';
 
 class Login {
+  final String name;
   final String email;
   final String password;
 
-  Login(this.email, this.password);
+  const Login(this.email, this.password, this.name);
 
   toJson() {
     Map<String, dynamic> loginMap = {
-      'email': email,
-      'password': password,
+      "email": email,
+      "senha": password,
+      "Nome": name,
     };
-    String loginJson = jsonEncode(loginMap);
-    return loginJson;
+    return loginMap;
   }
 }

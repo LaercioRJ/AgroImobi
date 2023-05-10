@@ -19,16 +19,15 @@ class RegisterUserScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Form(
-        key: _formKey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+        backgroundColor: Colors.white,
+        body: Form(
+          key: _formKey,
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             const Center(
               child: Padding(
                 padding: EdgeInsets.fromLTRB(0, 1, 0, 5),
-                child: Text('Seja bem-vindo! Cadastre-se aqui para usar o app.',
+                child: Text(
+                  'Seja bem-vindo! Cadastre-se aqui para usar o app.',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Color.fromARGB(255, 19, 122, 25),
@@ -39,8 +38,7 @@ class RegisterUserScreen extends StatelessWidget {
             ),
             TextFormField(
               decoration: const InputDecoration(
-                labelText: 'Nome Completo',
-                border: UnderlineInputBorder()),
+                  labelText: 'Nome Completo', border: UnderlineInputBorder()),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return "Por favor, preencha este campo";
@@ -51,7 +49,7 @@ class RegisterUserScreen extends StatelessWidget {
             ),
             TextFormField(
               decoration: const InputDecoration(
-                labelText: 'Email', border: UnderlineInputBorder()),
+                  labelText: 'Email', border: UnderlineInputBorder()),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Por favor, preencha este campo';
@@ -67,8 +65,7 @@ class RegisterUserScreen extends StatelessWidget {
             TextFormField(
               obscureText: true,
               decoration: const InputDecoration(
-                labelText: 'Criar Senha',
-                border: UnderlineInputBorder()),
+                  labelText: 'Criar Senha', border: UnderlineInputBorder()),
               controller: passwordController,
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -81,8 +78,8 @@ class RegisterUserScreen extends StatelessWidget {
             TextFormField(
               obscureText: true,
               decoration: const InputDecoration(
-                labelText: 'Confirme a Senha',
-                border: UnderlineInputBorder()),
+                  labelText: 'Confirme a Senha',
+                  border: UnderlineInputBorder()),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return "Por favor, preencha este campo";
@@ -98,16 +95,15 @@ class RegisterUserScreen extends StatelessWidget {
               title: 'Cadastrar',
               pressedFunction: () {
                 var user = User(name, email, password);
-                ServerInterface().registerInformation('okdeokd', user.toJson()).then((result) {
-                    
-                });
+                ServerInterface()
+                    .sendingInformation(
+                        'http://localhost:3000/login', user.toJson())
+                    .then((result) {});
               },
               formKey: _formKey,
             ),
             const GoBackLinkButton(linkText: 'Já possuo cadastro')
-          ]
-      ),
-      )
-    );
+          ]),
+        ));
   }
 }

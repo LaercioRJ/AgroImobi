@@ -18,9 +18,9 @@ class RegisterBrokerScreen extends StatefulWidget {
 class _RegisterBrokerScreenState extends State<RegisterBrokerScreen> {
   final _formKey = GlobalKey<FormState>();
   final cellphoneMask = MaskTextInputFormatter(
-    mask: '(##) #####-####',
-    filter: {"#": RegExp(r'[0-9]')},
-    type: MaskAutoCompletionType.lazy);
+      mask: '(##) #####-####',
+      filter: {"#": RegExp(r'[0-9]')},
+      type: MaskAutoCompletionType.lazy);
   final RegExp emailValidator =
       RegExp("([A-Z | a-z | 0-9]+)@([A-Z | a-z | 0-9]+).com");
   late String name;
@@ -38,114 +38,114 @@ class _RegisterBrokerScreenState extends State<RegisterBrokerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Form(
-        key: _formKey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'Nome Completo',
-                border: UnderlineInputBorder()),
-              validator: (value) {
-                if (value != null) {
-                  name = value;
-                }
-                if (value == null || value.isEmpty) {
-                  return "Por favor, preencha este campo";
-                }
-                return null;
-              },
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'Email',
-                border: UnderlineInputBorder(),
-              ),
-              validator: (value) {
-                if (value != null) {
-                  email = value;
-                }
-                if (value == null || value.isEmpty) {
-                  return 'Por favor, preencha este campo';
-                } else {
-                  if (!emailValidator.hasMatch(value)) {
-                    return "Este é um formato inválido de e-mail.";
+        backgroundColor: Colors.white,
+        body: Form(
+            key: _formKey,
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              TextFormField(
+                decoration: const InputDecoration(
+                    labelText: 'Nome Completo', border: UnderlineInputBorder()),
+                validator: (value) {
+                  if (value != null) {
+                    name = value;
                   }
-                }
-                return null;
-              },
-            ),
-            TextFormField(
-              obscureText: true,
-              decoration: const InputDecoration(
-                labelText: 'Criar Senha',
-                border: UnderlineInputBorder(),
-              ),
-              validator: (value) {
-                if (value != null) {
-                  password = value;
-                }
-                if (value == null || value.isEmpty) {
-                  return "Por favor, preencha este campo";
-                }
-                return null;
-              },
-            ),
-            TextFormField(
-              obscureText: true,
-              decoration: const InputDecoration(
-                labelText: 'Confirme a Senha',
-                border: UnderlineInputBorder(),
-              ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return "Por favor, preencha este campo";
-                } else {
-                  if (value != password) {
-                    return "Os campos de senha não são equivalentes.";
+                  if (value == null || value.isEmpty) {
+                    return "Por favor, preencha este campo";
                   }
-                }
-                return null;
-              },
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'Telefone Celular',
-                border: UnderlineInputBorder(),
+                  return null;
+                },
               ),
-              inputFormatters: [cellphoneMask],
-              controller: cellphone,
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'Email',
+                  border: UnderlineInputBorder(),
+                ),
+                validator: (value) {
+                  if (value != null) {
+                    email = value;
+                  }
+                  if (value == null || value.isEmpty) {
+                    return 'Por favor, preencha este campo';
+                  } else {
+                    if (!emailValidator.hasMatch(value)) {
+                      return "Este é um formato inválido de e-mail.";
+                    }
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                obscureText: true,
+                decoration: const InputDecoration(
+                  labelText: 'Criar Senha',
+                  border: UnderlineInputBorder(),
+                ),
+                validator: (value) {
+                  if (value != null) {
+                    password = value;
+                  }
+                  if (value == null || value.isEmpty) {
+                    return "Por favor, preencha este campo";
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                obscureText: true,
+                decoration: const InputDecoration(
+                  labelText: 'Confirme a Senha',
+                  border: UnderlineInputBorder(),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Por favor, preencha este campo";
+                  } else {
+                    if (value != password) {
+                      return "Os campos de senha não são equivalentes.";
+                    }
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'Telefone Celular',
+                  border: UnderlineInputBorder(),
+                ),
+                inputFormatters: [cellphoneMask],
+                controller: cellphone,
+              ),
+              TextFormField(
+                  decoration: const InputDecoration(
                 labelText: 'CRECI',
                 border: UnderlineInputBorder(),
-            )),
-            const SizedBox(
-              width: 10,
-              height: 10,
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Dropdown(list: statesList, onSelect: changeSelectedState,),
-            ),
-            SubmitButton(
-              title: "Cadastrar",
-              pressedFunction: () {
-                var broker = Broker(name, email, password, cellphone.text, creci);
-                ServerInterface().registerInformation('jijij', broker.toJson()).then((result) {
-                  // what to do after user is registered
-                });
-              },
-              formKey: _formKey
-            ),
-            const GoBackLinkButton(
-              linkText: 'Já possuo cadastro')
-          ]
-        )
-      )
-    );
+              )),
+              const SizedBox(
+                width: 10,
+                height: 10,
+              ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Dropdown(
+                  list: statesList,
+                  onSelect: changeSelectedState,
+                ),
+              ),
+              SubmitButton(
+                  title: "Cadastrar",
+                  pressedFunction: () {
+                    var broker =
+                        Broker(name, email, password, cellphone.text, creci);
+                    ServerInterface()
+                        .sendingInformation(
+                            'http://localhost:3000/login', broker.toJson())
+                        .then((result) {
+                      // what to do after user is registered
+                    });
+                  },
+                  formKey: _formKey),
+              const GoBackLinkButton(linkText: 'Já possuo cadastro')
+            ])));
   }
 }

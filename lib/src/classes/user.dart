@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:json_annotation/json_annotation.dart';
+
 class User {
   final String name;
   final String email;
@@ -9,11 +11,10 @@ class User {
 
   toJson() {
     Map<String, dynamic> userMap = {
-      'nome': name,
-      'email': email,
-      'password': password,
+      "email": email,
+      "senha": password,
+      "Nome": name,
     };
-    String userJson = jsonEncode(userMap);
-    return userJson;
+    return userMap;
   }
 }
