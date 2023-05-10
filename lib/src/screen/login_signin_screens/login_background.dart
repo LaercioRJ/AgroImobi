@@ -5,7 +5,6 @@ import './login_screen.dart';
 class LoginBackground extends StatelessWidget {
   final VoidCallback logIntoApp;
   const LoginBackground({super.key, required this.logIntoApp});
-  // ignore: prefer_function_declarations_over_variables
   
 
   @override
@@ -22,9 +21,9 @@ class LoginBackground extends StatelessWidget {
         child: Center(
           child: Container(
             width: MediaQuery.of(context).size.width * 0.8,
-            height: MediaQuery.of(context).size.height * 0.55,
+            height: MediaQuery.of(context).size.height * 0.60,
             decoration: const BoxDecoration(
-              color: Colors.white,
+              color: Color.fromARGB(255, 240, 240, 240),
               borderRadius: BorderRadius.all(Radius.circular(20)),
             ),
             child: Padding(

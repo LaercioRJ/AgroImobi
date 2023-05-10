@@ -19,10 +19,12 @@ class RegisterUserScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        body: Form(
-          key: _formKey,
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+      backgroundColor: Colors.white,
+      body: Form(
+        key: _formKey,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
             const Center(
               child: Padding(
                 padding: EdgeInsets.fromLTRB(0, 1, 0, 5),

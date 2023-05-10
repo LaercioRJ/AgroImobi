@@ -38,86 +38,88 @@ class _RegisterBrokerScreenState extends State<RegisterBrokerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        body: Form(
-            key: _formKey,
-            child:
-                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              TextFormField(
-                decoration: const InputDecoration(
-                    labelText: 'Nome Completo', border: UnderlineInputBorder()),
-                validator: (value) {
-                  if (value != null) {
-                    name = value;
-                  }
-                  if (value == null || value.isEmpty) {
-                    return "Por favor, preencha este campo";
-                  }
-                  return null;
-                },
+      backgroundColor: Colors.white,
+      body: Form(
+        key: _formKey,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextFormField(
+              decoration: const InputDecoration(
+                labelText: 'Nome Completo',
+                border: UnderlineInputBorder()),
+              validator: (value) {
+                if (value != null) {
+                  name = value;
+                }
+                if (value == null || value.isEmpty) {
+                  return "Por favor, preencha este campo";
+                }
+                return null;
+              },
+            ),
+            TextFormField(
+              decoration: const InputDecoration(
+                labelText: 'Email',
+                border: UnderlineInputBorder(),
               ),
-              TextFormField(
-                decoration: const InputDecoration(
-                  labelText: 'Email',
-                  border: UnderlineInputBorder(),
-                ),
-                validator: (value) {
-                  if (value != null) {
-                    email = value;
+              validator: (value) {
+                if (value != null) {
+                  email = value;
+                }
+                if (value == null || value.isEmpty) {
+                  return 'Por favor, preencha este campo';
+                } else {
+                  if (!emailValidator.hasMatch(value)) {
+                    return "Este é um formato inválido de e-mail.";
                   }
-                  if (value == null || value.isEmpty) {
-                    return 'Por favor, preencha este campo';
-                  } else {
-                    if (!emailValidator.hasMatch(value)) {
-                      return "Este é um formato inválido de e-mail.";
-                    }
-                  }
-                  return null;
-                },
+                }
+                return null;
+              },
+            ),
+            TextFormField(
+              obscureText: true,
+              decoration: const InputDecoration(
+                labelText: 'Criar Senha',
+                border: UnderlineInputBorder(),
               ),
-              TextFormField(
-                obscureText: true,
-                decoration: const InputDecoration(
-                  labelText: 'Criar Senha',
-                  border: UnderlineInputBorder(),
-                ),
-                validator: (value) {
-                  if (value != null) {
-                    password = value;
-                  }
-                  if (value == null || value.isEmpty) {
-                    return "Por favor, preencha este campo";
-                  }
-                  return null;
-                },
+              validator: (value) {
+                if (value != null) {
+                  password = value;
+                }
+                if (value == null || value.isEmpty) {
+                  return "Por favor, preencha este campo";
+                }
+                return null;
+              },
+            ),
+            TextFormField(
+              obscureText: true,
+              decoration: const InputDecoration(
+                labelText: 'Confirme a Senha',
+                border: UnderlineInputBorder(),
               ),
-              TextFormField(
-                obscureText: true,
-                decoration: const InputDecoration(
-                  labelText: 'Confirme a Senha',
-                  border: UnderlineInputBorder(),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return "Por favor, preencha este campo";
-                  } else {
-                    if (value != password) {
-                      return "Os campos de senha não são equivalentes.";
-                    }
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return "Por favor, preencha este campo";
+                } else {
+                  if (value != password) {
+                    return "Os campos de senha não são equivalentes.";
                   }
-                  return null;
-                },
+                }
+                return null;
+              },
+            ),
+            TextFormField(
+              decoration: const InputDecoration(
+                labelText: 'Telefone Celular',
+                border: UnderlineInputBorder(),
               ),
-              TextFormField(
-                decoration: const InputDecoration(
-                  labelText: 'Telefone Celular',
-                  border: UnderlineInputBorder(),
-                ),
-                inputFormatters: [cellphoneMask],
-                controller: cellphone,
-              ),
-              TextFormField(
-                  decoration: const InputDecoration(
+              inputFormatters: [cellphoneMask],
+              controller: cellphone,
+            ),
+            TextFormField(
+              decoration: const InputDecoration(
                 labelText: 'CRECI',
                 border: UnderlineInputBorder(),
               )),
