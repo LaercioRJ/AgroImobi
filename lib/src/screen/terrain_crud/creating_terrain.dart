@@ -16,53 +16,103 @@ class _CreatingTerrainState extends State<CreatingTerrain> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-        /*onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
-      child: Scaffold(
-        key: scaffoldKey,
-        backgroundColor: Color(0xFFF1F4F8),
-        appBar: AppBar(
-          backgroundColor: Color(0xB91F6700),
-          automaticallyImplyLeading: true,
-          title: Text(
-            'Meus anuncios',
-            style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Outfit',
-                  color: Colors.white,
-                  fontSize: 28.0,
-                  fontWeight: FontWeight.normal,
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Criar Anúncio'),
+        backgroundColor: Colors.green,
+      ),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(2, 4, 2, 2),
+            child: Row(
+              children: [
+                Column(
+                  children: [
+                    Container(
+                      child: IconButton(
+                        onPressed: () => print(''),
+                        color: Colors.black,
+                        icon: const Icon(Icons.add_business),
+                        style: IconButton.styleFrom(
+                          backgroundColor: Colors.white
+                        ),
+                      ),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(width: 2, color: Colors.black)
+                      ),
+                    ),
+                    const Text('Info Geral')
+                  ],
                 ),
-          ),
-          actions: [
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
-              child: FlutterFlowIconButton(
-                borderColor: Colors.transparent,
-                borderRadius: 30.0,
-                borderWidth: 1.0,
-                buttonSize: 60.0,
-                icon: const Icon(
-                  Icons.account_circle,
-                  color: Colors.white,
-                  size: 30.0,
+                Expanded(
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(
+                          color: Colors.black,
+                          width: 2.0
+                        )
+                      )
+                    ),
+                  )
                 ),
-                onPressed: () {
-                  print('IconButton pressed ...');
-                },
-              ),
-            ),
-          ],
-          centerTitle: true,
-          elevation: 0.0,
-        ),
-        body: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * 0.33,
-          decoration: const BoxDecoration(
-            color: Colors.green
-          ),
-        ),
-      ),*/
-        );
+                Column(
+                  children: [
+                    Container(
+                      child: IconButton(
+                        onPressed: () => print(''),
+                        color: Colors.black,
+                        icon: const Icon(Icons.add_business),
+                        style: IconButton.styleFrom(
+                          backgroundColor: Colors.white
+                        ),
+                      ),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(width: 2, color: Colors.black)
+                      ),
+                    ),
+                    const Text('Info Geral')
+                  ],
+                ),
+                Expanded(
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(
+                          color: Colors.black,
+                          width: 2.0
+                        )
+                      )
+                    ),
+                  )
+                ),
+                Column(
+                  children: [
+                    Container(
+                      child: IconButton(
+                        onPressed: () => print(''),
+                        color: Colors.black,
+                        icon: const Icon(Icons.add_business),
+                        style: IconButton.styleFrom(
+                          backgroundColor: Colors.white
+                        ),
+                      ),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(width: 2, color: Colors.black)
+                      ),
+                    ),
+                    const Text('Info Geral')
+                  ],
+                ),
+              ],
+            )
+          )
+        ],
+      )
+    );
   }
 }
