@@ -35,4 +35,20 @@ class ServerInterface {
     }
     return false;
   }
+
+  Future<String> getUserInformation(url, body) async {
+    try {
+      var result = await http.get(Uri.parse(url));
+      final data = jsonDecode(result.body);
+      print(data);
+
+      if (result.statusCode == 200) {
+        return data;
+      }
+    } catch (exception) {
+      print(exception);
+      return '';
+    }
+    return '';
+  }
 }
