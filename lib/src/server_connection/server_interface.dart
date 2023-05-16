@@ -1,7 +1,5 @@
-import 'package:helloworld/src/classes/user.dart';
 import 'package:http/http.dart' as http;
 
-import '../classes/login.dart';
 import 'dart:convert';
 
 class ServerInterface {

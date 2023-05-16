@@ -38,7 +38,7 @@ class _RegisterBrokerScreenState extends State<RegisterBrokerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color.fromARGB(255, 240, 240, 240),
       body: Form(
         key: _formKey,
         child: Column(
@@ -140,9 +140,9 @@ class _RegisterBrokerScreenState extends State<RegisterBrokerScreen> {
                     var broker =
                         Broker(name, email, password, cellphone.text, creci);
                     ServerInterface()
-                        .sendingInformation(
-                            'http://localhost:3000/login', broker.toJson())
-                        .then((result) {
+                      .sendingInformation(
+                        'http://localhost:3000/login', broker.toJson())
+                          .then((result) {
                       // what to do after user is registered
                     });
                   },
