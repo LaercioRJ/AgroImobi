@@ -1,23 +1,33 @@
 import 'dart:convert';
 
 class Broker {
-  String name;
+  String Nome;
   String email;
-  String password;
-  String cellphone;
-  String creci;
+  String senha;
+  String telefone;
+  String municipio;
+  String cpf;
+  //String creci;
 
-  Broker(this.name, this.email, this.password, this.cellphone, this.creci);
+  Broker(
+    this.Nome,
+    this.email,
+    this.senha,
+    this.telefone,
+    this.municipio,
+    this.cpf,
+  );
 
   toJson() {
     Map<String, dynamic> brokerMap = {
-      'name': name,
       'email': email,
-      'password': password,
-      'cellphone': cellphone,
-      'CRECI': creci,
+      'senha': senha,
+      'Nome': Nome,
+      'telefone': telefone,
+      'municipio': municipio,
+      'cpf': cpf,
     };
-    String brokerJson = jsonEncode(brokerMap);
-    return brokerJson;
+    //String brokerJson = jsonEncode(brokerMap);
+    return brokerMap;
   }
 }

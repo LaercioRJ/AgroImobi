@@ -18,15 +18,16 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
 
   @override
   void initState() {
-    super.initState();
     _setDataFromJson();
+    super.initState();
   }
 
   void _setDataFromJson() async {
-    var user = User('', '2@gmail.com', '');
+    var user = User('', '1@1.com', '');
     var getDados = await ServerInterface()
-        .getUserInformation('http://localhost:3000/login/2@gmail.com', user);
-    print('aqui voltou $getDados');
+        .getUserInformation('http://localhost:3000/login/1@1.com', user);
+
+    print('aqui voltou');
 
     var data = jsonDecode(getDados);
     var userData = data['response'][0];
@@ -38,7 +39,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     });
   }
 
-  void _editData() {
+  void _editar() {
     setState(() {
       _isEditing = true;
     });
@@ -49,12 +50,12 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
       _isEditing = false;
       var user = User(_nameController.text, _emailController.text,
           _passwordController.text);
-      // Enviar os dados atualizados para a API
-      ServerInterface().sendingInformation('URL_DA_API', user.toJson());
+
+      //erverInterface().sendingInformation('http://localhost:3000/login/', user.toJson());
     });
   }
 
-  void _cancelEdit() {
+  void _cancelar() {
     setState(() {
       _isEditing = false;
       _setDataFromJson();
@@ -81,24 +82,18 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
               decoration: InputDecoration(labelText: "Email"),
               enabled: _isEditing,
             ),
-            TextFormField(
-              controller: _passwordController,
-              decoration: InputDecoration(labelText: "Senha"),
-              obscureText: !_isEditing,
-              enabled: _isEditing,
-            ),
             SizedBox(height: 16.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
                   child: Text(_isEditing ? "Salvar" : "Editar"),
-                  onPressed: _isEditing ? _saveData : _editData,
+                  onPressed: _isEditing ? _saveData : _editar,
                 ),
                 if (_isEditing)
                   ElevatedButton(
                     child: Text("Cancelar"),
-                    onPressed: _cancelEdit,
+                    onPressed: _cancelar,
                   ),
               ],
             ),
