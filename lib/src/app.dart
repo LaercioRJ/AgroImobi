@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'routing/delegate.dart';
 import 'routing/parser.dart';
 
-import 'classes/custom_scroll_behavior.dart';
+import 'service_classes/custom_scroll_behavior.dart';
 
 class AgroNpApp extends StatefulWidget {
   const AgroNpApp({super.key});

@@ -12,9 +12,9 @@ class MyProfileScreen extends StatefulWidget {
 
 class _MyProfileScreenState extends State<MyProfileScreen> {
   bool _isEditing = false;
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   void initState() {
@@ -66,23 +66,23 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Profile Screen"),
+        title: const Text("Profile Screen"),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             TextFormField(
               controller: _nameController,
-              decoration: InputDecoration(labelText: "Nome"),
+              decoration: const InputDecoration(labelText: "Nome"),
               enabled: _isEditing,
             ),
             TextFormField(
               controller: _emailController,
-              decoration: InputDecoration(labelText: "Email"),
+              decoration: const InputDecoration(labelText: "Email"),
               enabled: _isEditing,
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -92,7 +92,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                 ),
                 if (_isEditing)
                   ElevatedButton(
-                    child: Text("Cancelar"),
+                    child: const Text("Cancelar"),
                     onPressed: _cancelar,
                   ),
               ],

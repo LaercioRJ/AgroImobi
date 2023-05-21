@@ -4,14 +4,13 @@ import 'package:helloworld/src/classes/user.dart';
 import 'package:helloworld/src/widgets/go_back_link_button.dart';
 import 'package:helloworld/src/widgets/submit_button.dart';
 
+import 'package:helloworld/src/service_classes/regexp_validators.dart';
 import 'package:helloworld/src/server_connection/server_interface.dart';
 
 class RegisterUserScreen extends StatelessWidget {
   RegisterUserScreen({super.key});
   final _formKey = GlobalKey<FormState>();
   final TextEditingController passwordController = TextEditingController();
-  final RegExp emailValidator =
-      RegExp("([A-Z | a-z | 0-9]+)@([A-Z | a-z | 0-9]+).com");
   late final String name;
   late final String email;
   late final String password;
@@ -56,7 +55,7 @@ class RegisterUserScreen extends StatelessWidget {
                 if (value == null || value.isEmpty) {
                   return 'Por favor, preencha este campo';
                 } else {
-                  if (!emailValidator.hasMatch(value)) {
+                  if (!RegExpValidators.emailValidator.hasMatch(value)) {
                     return "Este é um formato inválido de e-mail.";
                   }
                 }

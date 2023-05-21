@@ -7,7 +7,8 @@ import 'package:helloworld/src/widgets/link_button.dart';
 import 'register_user.dart';
 import 'register_broker.dart';
 
-import 'package:helloworld/src/classes/message_deliver.dart';
+import 'package:helloworld/src/service_classes/message_deliver.dart';
+import 'package:helloworld/src/service_classes/regExp_validators.dart';
 import 'package:helloworld/src/server_connection/server_interface.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -23,9 +24,6 @@ class LoginScreen extends StatefulWidget {
 
 class LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  RegExp emailValidator =
-      RegExp("([A-Z | a-z | 0-9]+)@([A-Z | a-z | 0-9]+).com");
-
   Login? loginModel;
   late String email;
   late String senha;
@@ -33,7 +31,7 @@ class LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: const Color.fromARGB(255, 240, 240, 240),
         body: Form(
             key: _formKey,
             child: Column(
@@ -60,7 +58,7 @@ class LoginScreenState extends State<LoginScreen> {
                         if (value == null || value.isEmpty) {
                           return 'Por favor, preencha este campo';
                         } else {
-                          if (!emailValidator.hasMatch(value)) {
+                          if (!RegExpValidators.emailValidator.hasMatch(value)) {
                             return "Este é um formato inválido de e-mail.";
                           }
                         }

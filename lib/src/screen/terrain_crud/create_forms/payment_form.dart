@@ -36,7 +36,7 @@ class CardWidget extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: 400,
-      margin: EdgeInsets.all(16.0),
+      margin: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8.0),

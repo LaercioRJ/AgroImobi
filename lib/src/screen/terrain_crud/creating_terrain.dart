@@ -141,7 +141,7 @@ class _CreatingTerrainState extends State<CreatingTerrain> {
                     icon: const Icon(Icons.receipt_long),
                     color: menuColors[3],
                     pressedFunction: () => {
-                      
+                      widget._pageController.animateToPage(3, duration: const Duration(milliseconds: 750), curve: Curves.ease)
                     },
                   )
                 ],
