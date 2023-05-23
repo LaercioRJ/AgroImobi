@@ -12,40 +12,72 @@ class TerrainCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.025),
+      padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.03),
       child: InkWell(
         onTap: () {
           selectTerrain(1);
         },
         child: Container(
-        width: MediaQuery.of(context).size.width * 0.445,
-        height: MediaQuery.of(context).size.height * 0.4,
+        width: MediaQuery.of(context).size.width * 0.94,
+        height: MediaQuery.of(context).size.height * 0.445,
         alignment: Alignment.topCenter,
         decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(17)),
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey,
-              spreadRadius: 1,
-              blurRadius: 1
+              color: Color.fromARGB(255, 90, 90, 90),
+              spreadRadius: 2,
+              blurRadius: 2,
+              offset: Offset(-2, 2)
             )
           ]
         ),
         child: Column(
           children: [
             Container(
-              width: MediaQuery.of(context).size.width * 0.4425,
+              width: MediaQuery.of(context).size.width * 0.94,
               height: MediaQuery.of(context).size.height * 0.22,
               decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage("lib/src/assets/terrain.jpg"),
                   fit: BoxFit.cover
-                ),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(17),
-                  topRight: Radius.circular(17)
-                ),
+                )
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: 3,
+                          right: MediaQuery.of(context).size.width * 0.79
+                        ),
+                        child: InkWell(
+                          child: Container(
+                            height: MediaQuery.of(context).size.height * 0.05,
+                            width: MediaQuery.of(context).size.width * 0.07,
+                            decoration: const BoxDecoration(
+                              color: Color.fromARGB(65, 219, 219, 219)
+                            ),
+                          ),
+                        )
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 3),
+                        child: InkWell(
+                          child: Container(
+                            height: MediaQuery.of(context).size.height * 0.05,
+                            width: MediaQuery.of(context).size.width * 0.07,
+                            decoration: const BoxDecoration(
+                              color: Color.fromARGB(65, 219, 219, 219)
+                            ),
+                          ),
+                        )
+                      ),
+                    ],
+                  )
+                ],
               ),
             ),
             Padding(
@@ -53,13 +85,16 @@ class TerrainCard extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(3),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
                       alignment: Alignment.center,
-                      width: MediaQuery.of(context).size.width * 0.4,
+                      width: MediaQuery.of(context).size.width * 0.7,
                       child: const Text(
                         'Fazenda com reserva natural',
-                        style: TextStyle(fontSize: 16),  
+                        style: TextStyle(
+                          fontSize: 120
+                        ),
                       )
                     )
                   ],

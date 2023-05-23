@@ -13,16 +13,10 @@ class PaymentFormState extends State<PaymentForm> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
-          children: [
-            Container(
-              child: CardWidget(),
-            ),
-            Container(
-              child: CardWidget(),
-            ),
-            Container(
-              child: CardWidget(),
-            ),
+          children: const [
+            CardWidget(),
+            CardWidget(),
+            CardWidget()
           ],
         ),
       ),
@@ -31,6 +25,7 @@ class PaymentFormState extends State<PaymentForm> {
 }
 
 class CardWidget extends StatelessWidget {
+  const CardWidget({super.key});
   @override
   Widget build(BuildContext context) {
     return Container(

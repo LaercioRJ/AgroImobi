@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../widgets/labeled_icon_button.dart';
+import 'specific_widgets/labeled_icon_button.dart';
 
 import './create_forms/basic_info_form.dart';
 import './create_forms/payment_form.dart';

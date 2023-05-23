@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../specific_widgets/tutorial_card.dart';
+
 class BasicInfoForm extends StatefulWidget {
   final VoidCallback onSubmit;
   const BasicInfoForm({super.key, required this.onSubmit});
@@ -14,26 +16,89 @@ class BasicInfoFormState extends State<BasicInfoForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(2, 5, 2, 0),
+        padding: const EdgeInsets.fromLTRB(2, 15, 2, 0),
         child: Column(
           children: [
-            Center(
-              child: Container(
-                width: MediaQuery.of(context).size.width * 0.80,
-                height: 250,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [ 
-                    BoxShadow(
-                      color: Colors.black,
-                      spreadRadius: 5,
-                      blurRadius: 7
-                    )
-                  ]
+            const Center(
+              child: TutorialCard(),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 15),
+              child: Center(
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.95,
+                  height: 250,
+                  decoration: const BoxDecoration(
+                    color: Color.fromARGB(255, 245, 245, 245),
+                    boxShadow: [ 
+                      BoxShadow(
+                        color: Color.fromARGB(255, 90, 90, 90),
+                        spreadRadius: 2,
+                        blurRadius: 2,
+                        offset: Offset(-2, 2)
+                      )
+                    ]
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
+                    child: Column(
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(bottom: 7),
+                          child: Text(
+                            'Informações Gerais',
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 9, 77, 0),
+                              fontSize: 22,
+                              fontFamily: 'arial'
+                            ),
+                          ),
+                        ),
+                        TextField(
+                          decoration: InputDecoration(
+                            labelText: 'Título',
+                            icon: const Icon(Icons.title),
+                            iconColor: Colors.green[600],
+                            fillColor: Colors.green,
+                            border: const UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.green
+                              )
+                            ),
+                            focusColor: Colors.green
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 12),
+                          child: TextField(
+                            decoration: InputDecoration(
+                              labelText: 'Título',
+                              icon: const Icon(Icons.title),
+                              iconColor: Colors.green[600],
+                              border: const OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.green
+                                )
+                              ),
+                              focusedBorder: const OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.green
+                                )
+                              ),
+                              enabledBorder: const OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.green
+                                )
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  )
                 ),
-              ),
+              )
             )
-
             /*const Center(
               child: Text(
                 'Primeiro Passo: Preencha as Informações Gerais do seu Anúncio',

@@ -20,7 +20,7 @@ class VisualizeTerrain extends StatelessWidget {
         appBar: AppBar(
            title: const Text('Novo Anúncio')
         ),
-        body: Container(
+        body: SizedBox(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height * 0.33,
           child: PageView(

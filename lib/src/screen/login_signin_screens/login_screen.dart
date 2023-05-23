@@ -54,7 +54,7 @@ class LoginScreenState extends State<LoginScreen> {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 5.0),
                   child: TextFormField(
-                      validator: (value) {
+                      /*validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Por favor, preencha este campo';
                         } else {
@@ -64,7 +64,7 @@ class LoginScreenState extends State<LoginScreen> {
                         }
                         email = value;
                         return null;
-                      },
+                      },*/
                       decoration: const InputDecoration(
                           icon: Icon(Icons.person),
                           labelText: 'Usuário',
@@ -73,13 +73,13 @@ class LoginScreenState extends State<LoginScreen> {
                                   BorderRadius.all(Radius.circular(10))))),
                 ),
                 TextFormField(
-                    validator: (value) {
+                    /*validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Por favor, preencha este campo';
                       }
                       senha = value;
                       return null;
-                    },
+                    },*/
                     obscureText: true,
                     decoration: const InputDecoration(
                       icon: Icon(Icons.password),
@@ -90,19 +90,19 @@ class LoginScreenState extends State<LoginScreen> {
                 SubmitButton(
                   title: 'Entrar',
                   pressedFunction: () async {
-                    var login = Login(email, senha, '');
+                   /* var login = Login(email, senha, '');
                     ServerInterface()
                         .verifyInformation(
                             'http://localhost:3000/login/' + email,
                             login.toJson())
                         .then((result) {
-                      if (result) {
+                      if (result) {*/
                         widget.onTapped();
-                      } else {
+                      /*} else {
                         MessageDeliver().showSimpleMessage(
                             'Senha ou email incorretos.', context);
                       }
-                    });
+                    });*/
                   },
                   formKey: _formKey,
                 ),

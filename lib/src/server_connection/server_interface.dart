@@ -38,7 +38,6 @@ class ServerInterface {
     try {
       var result = await http.get(Uri.parse(url));
       final data = jsonDecode(result.body);
-      print(data['response'][0]);
 
       if (result.statusCode == 200) {
         return data['response'][0];
