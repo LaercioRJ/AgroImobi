@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class TerrainCard extends StatelessWidget {
   final Function selectTerrain;
@@ -41,7 +42,15 @@ class TerrainCard extends StatelessWidget {
                 image: DecorationImage(
                   image: AssetImage("lib/src/assets/terrain.jpg"),
                   fit: BoxFit.cover
-                )
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Color.fromARGB(255, 124, 124, 124),
+                    spreadRadius: 2,
+                    blurRadius: 2,
+                    offset: Offset(0, 1)
+                  )
+                ]
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -51,7 +60,7 @@ class TerrainCard extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.only(
                           left: 3,
-                          right: MediaQuery.of(context).size.width * 0.79
+                          right: MediaQuery.of(context).size.width * 0.77
                         ),
                         child: InkWell(
                           child: Container(
@@ -83,24 +92,159 @@ class TerrainCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(0.1),
               child: Padding(
-                padding: const EdgeInsets.all(3),
+                padding: const EdgeInsets.fromLTRB(0, 3, 0, 18),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
                       alignment: Alignment.center,
-                      width: MediaQuery.of(context).size.width * 0.7,
+                      width: MediaQuery.of(context).size.width * 0.8,
                       child: const Text(
                         'Fazenda com reserva natural',
                         style: TextStyle(
-                          fontSize: 120
+                          fontSize: 24,
+                          fontFamily: 'arial',
+                          fontWeight: FontWeight.w500
                         ),
                       )
                     )
                   ],
                 ),
               )
-            )
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 65),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 0),
+                    child: Column(
+                      children: const [
+                        Text(
+                          'R\$ 300.000',
+                          style: TextStyle(
+                            color: Colors.green,
+                            fontSize: 23
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 3),
+                          child: Text(
+                            '(COMPRA)',
+                            style: TextStyle(
+                              fontSize: 13
+                            ),
+                          ),
+                        )
+                      ]
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 25, right: 25, bottom: 5),
+                    child: Text(
+                      '/',
+                      style: TextStyle(
+                        fontSize: 29,
+                        color: Color.fromARGB(255, 0, 80, 0)
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 0),
+                    child: Column(
+                      children: const [
+                        Text(
+                          'R\$ 300.000',
+                          style: TextStyle(
+                            color: Colors.green,
+                            fontSize: 23
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 3),
+                          child: Text(
+                            '(arrendamento)',
+                            style: TextStyle(
+                              fontSize: 13
+                            ),
+                          ),
+                        )
+                      ]
+                    ),
+                  ),
+                ],
+              ) 
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 1, right: 1),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        border: Border(
+                            bottom: BorderSide(
+                              color: Color.fromARGB(255, 0, 68, 4),
+                              width: 2.0
+                            )
+                          )
+                      ),
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 2, right: 2),
+                    child: Text(
+                      'PROPRIEDADES',
+                      style: TextStyle(
+                        fontSize: 12
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(
+                            color: Color.fromARGB(255, 0, 68, 4),
+                            width: 2.0
+                          )
+                        )
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 3),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Padding(
+                    padding: EdgeInsets.only(left: 3, right: 3),
+                    child: Icon(
+                      Icons.water,
+                      size: 28,
+                    ),  
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 3, right: 3),
+                    child: Icon(
+                      Icons.pets,
+                      size: 28,
+                    ),  
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 3, right: 3),
+                    child: Icon(
+                      Icons.bolt,
+                      size: 28,
+                    ),  
+                  )
+                ]
+              ),
+            ),
           ])
         ),
       )
