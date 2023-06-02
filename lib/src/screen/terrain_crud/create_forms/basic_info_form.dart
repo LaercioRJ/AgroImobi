@@ -2,15 +2,30 @@ import 'package:flutter/material.dart';
 
 import '../specific_widgets/tutorial_card.dart';
 
+import '../../../widgets/dropdown.dart';
+import '../../../widgets/text_divider.dart';
+
+import '../../../classes/terrain.dart';
+
 class BasicInfoForm extends StatefulWidget {
-  final VoidCallback onSubmit;
-  const BasicInfoForm({super.key, required this.onSubmit});
+  final Function onSubmit;
+  Terrain terrainReference;
+  BasicInfoForm({
+    super.key,
+    required this.onSubmit,
+    required this.terrainReference
+  });
 
   @override
   State<BasicInfoForm> createState() => BasicInfoFormState();
 }
 
 class BasicInfoFormState extends State<BasicInfoForm> {
+  final _formKey = GlobalKey<FormState>();
+  final List<String> metricUnits = ['Hectar', 'Metros Qd.', 'Km Qd.'];
+  final List<String> tutorialMessages = ['Seja bem-vindo', 'Olhe o que tem de bom!'];
+  bool sellOption = false;
+  bool rentOption = false;
 
   @override
   Widget build(BuildContext context) {
@@ -19,15 +34,14 @@ class BasicInfoFormState extends State<BasicInfoForm> {
         padding: const EdgeInsets.fromLTRB(2, 15, 2, 0),
         child: Column(
           children: [
-            const Center(
-              child: TutorialCard(),
+            Center(
+              child: TutorialCard(messages: tutorialMessages)
             ),
             Padding(
               padding: const EdgeInsets.only(top: 15),
               child: Center(
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.95,
-                  height: 250,
                   decoration: const BoxDecoration(
                     color: Color.fromARGB(255, 245, 245, 245),
                     boxShadow: [ 
@@ -41,115 +55,172 @@ class BasicInfoFormState extends State<BasicInfoForm> {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
-                    child: Column(
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.only(bottom: 7),
-                          child: Text(
-                            'Informações Gerais',
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 9, 77, 0),
-                              fontSize: 22,
-                              fontFamily: 'arial'
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.only(bottom: 7),
+                            child: Text(
+                              'Informações Gerais',
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 9, 77, 0),
+                                fontSize: 22,
+                                fontFamily: 'arial'
+                              ),
                             ),
                           ),
-                        ),
-                        TextField(
-                          decoration: InputDecoration(
-                            labelText: 'Título',
-                            icon: const Icon(Icons.title),
-                            iconColor: Colors.green[600],
-                            fillColor: Colors.green,
-                            border: const UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.green
-                              )
-                            ),
-                            focusColor: Colors.green
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 12),
-                          child: TextField(
+                          TextField(
                             decoration: InputDecoration(
                               labelText: 'Título',
                               icon: const Icon(Icons.title),
                               iconColor: Colors.green[600],
-                              border: const OutlineInputBorder(
+                              fillColor: Colors.green,
+                              border: const UnderlineInputBorder(
                                 borderSide: BorderSide(
                                   color: Colors.green
                                 )
                               ),
-                              focusedBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.green
-                                )
+                              focusColor: Colors.green
+                            ),
+                          ),
+                          Row(
+                            children:[
+                              Expanded(
+                                child: TextField(
+                                  decoration: InputDecoration(
+                                    labelText: 'Area Total',
+                                    icon: const Icon(Icons.crop),
+                                    iconColor: Colors.green[600],
+                                    fillColor: Colors.green,
+                                    border: const UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Colors.green
+                                      )
+                                    ),
+                                    focusColor: Colors.green
+                                  ),
+                                ),
                               ),
-                              enabledBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.green
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: Dropdown(
+                                    label: 'Uni. Medida',
+                                    list: metricUnits,
+                                    onSelect: (name) => {}
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.only(top: 15, bottom: 10),
+                            child: TextDivider(label: 'TIPO TRANSAÇÃO'),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Checkbox(
+                                  activeColor: Colors.green,
+                                  checkColor: Colors.white,
+                                  value: sellOption,
+                                  onChanged: (bool? value) {
+                                    setState(() {
+                                      sellOption = value!;
+                                    });
+                                  }
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.only(left: 5, right: 20),
+                                  child: Text('Vender'),
+                                ),
+                                Checkbox(
+                                  activeColor: Colors.green,
+                                  checkColor: Colors.white,
+                                  value: rentOption,
+                                  onChanged: (bool? value) {
+                                    setState(() {
+                                      rentOption = value!;
+                                    });
+                                  }
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.only(left: 5),
+                                  child: Text('Arrendar'),
                                 )
+                              ] 
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 10),
+                            child: TextFormField(
+                              enabled: sellOption,
+                              decoration: InputDecoration(
+                                labelText: 'Valor Venda',
+                                icon: const Icon(Icons.attach_money),
+                                iconColor: Colors.green[600],
+                                fillColor: Colors.green,
+                                border: const UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.green
+                                  )
+                                ),
+                                focusColor: Colors.green
                               ),
                             ),
                           ),
-                        )
-                      ],
-                    ),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 10),
+                            child: TextFormField(
+                              enabled: rentOption,
+                              decoration: InputDecoration(
+                                labelText: 'Valor Arrendamento',
+                                icon: const Icon(Icons.paid),
+                                iconColor: Colors.green[600],
+                                fillColor: Colors.green,
+                                border: const UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.green
+                                  )
+                                ),
+                                focusColor: Colors.green
+                              ),
+                            ),
+                          ),                          
+                          Center(
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.7,
+                              child: Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(25),
+                                  child: TextButton(
+                                    style: TextButton.styleFrom(
+                                      backgroundColor: Colors.green,
+                                      foregroundColor: Colors.white,
+                                      padding: const EdgeInsets.fromLTRB(70, 18, 70, 18),
+                                      textStyle: const TextStyle(fontSize: 22)),
+                                    onPressed: () {
+                                      widget.onSubmit(1, widget.terrainReference);
+                                    },
+                                    child: const Text('Definir')),
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    )
                   )
                 ),
               )
             )
-            /*const Center(
-              child: Text(
-                'Primeiro Passo: Preencha as Informações Gerais do seu Anúncio',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20
-                ),
-              ) 
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 4, 0, 2),
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.80,
-                child: TextFormField(
-                  decoration: const InputDecoration(
-                    focusColor: Colors.green,
-                    iconColor: Colors.green,
-                    icon: Icon(Icons.title),
-                    labelText: 'Título',
-                    border: UnderlineInputBorder()
-                  ),
-                ),
-              ) 
-            )*/
           ],
         ),
       ),
     );
   }
 }
-
-
- /*Center(
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.5,
-                height: MediaQuery.of(context).size.height * 0.15,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(25),
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        backgroundColor: Colors.green,
-                        foregroundColor: Colors.white,
-                        padding: const EdgeInsets.fromLTRB(70, 18, 70, 18),
-                        textStyle: const TextStyle(fontSize: 22)),
-                      onPressed: () {
-                        widget.onSubmit();
-                      },
-                      child: const Text('Enviar')),
-                  ),
-                ),
-              ),
-            )*/

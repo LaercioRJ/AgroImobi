@@ -3,8 +3,12 @@ import 'dart:convert';
 
 class Terrain {
   int id;
-  double valor;
-  double areaTotal;
+  bool sell;
+  bool rent;
+  double sellPrice;
+  double rentPrice;
+  double totalArea;
+  String areaType;
   String aptidao;
   //String localizacao; // checar qual o tipo de dados
   String cidade;
@@ -21,8 +25,12 @@ class Terrain {
 
   Terrain(
     this.id,
-    this.valor,
-    this.areaTotal,
+    this.sell,
+    this.rent,
+    this.sellPrice,
+    this.rentPrice,
+    this.totalArea,
+    this.areaType,
     this.aptidao,
     this.cidade,
     this.estado,
@@ -40,8 +48,12 @@ class Terrain {
   toJson() {
     Map<String, dynamic> terrainMap = {
       'id': id,
-      'valor': valor,
-      'areaTotal': areaTotal,
+      'sell': sell,
+      'rent': rent,
+      'sellPrice': sellPrice,
+      'rentPrice': rentPrice,
+      'totalArea': totalArea,
+      'areaType': areaType,
       'aptidao': aptidao,
       'cidade': cidade,
       'estado': estado,
@@ -57,5 +69,31 @@ class Terrain {
     };
     String terrainJson = jsonEncode(terrainMap);
     return terrainJson;
+  }
+
+  static createEmptyObject() {
+    Terrain terrain = Terrain(
+      -1,
+      false,
+      false,
+      -1,
+      -1,
+      -1,
+      '',
+      '',
+      '',
+      '',
+      '',
+      -1,
+      '',
+      ['', ''],
+      '',
+      '',
+      '',
+      '',
+      ''
+    );
+
+    return terrain;
   }
 }

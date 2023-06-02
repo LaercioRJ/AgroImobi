@@ -27,8 +27,6 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     var getDados = await ServerInterface()
         .getUserInformation('http://localhost:3000/login/1@1.com', user);
 
-    print('aqui voltou');
-
     var data = jsonDecode(getDados);
     var userData = data['response'][0];
 

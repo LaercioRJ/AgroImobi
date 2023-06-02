@@ -3,8 +3,12 @@ import 'package:helloworld/src/classes/terrain.dart';
 class TerrainData {
   Terrain terrain = Terrain(
       1,
+      true,
+      true,
       1000000,
+      20000,
       200000,
+      '',
       'gado de corte',
       'bauru',
       'sp',

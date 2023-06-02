@@ -142,9 +142,13 @@ class _RegisterBrokerScreenState extends State<RegisterBrokerScreen> {
               ),
               Align(
                 alignment: Alignment.centerLeft,
-                child: Dropdown(
-                  list: statesList,
-                  onSelect: changeSelectedState,
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.25,
+                  child: Dropdown(
+                    label: 'Estado',
+                    list: statesList,
+                    onSelect: changeSelectedState,
+                  ),
                 ),
               ),
               SubmitButton(

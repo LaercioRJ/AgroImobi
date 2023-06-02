@@ -21,7 +21,7 @@ class LoginBackground extends StatelessWidget {
         child: Center(
           child: Container(
             width: MediaQuery.of(context).size.width * 0.8,
-            height: MediaQuery.of(context).size.height * 0.60,
+            height: MediaQuery.of(context).size.height * 0.65,
             decoration: const BoxDecoration(
               color: Color.fromARGB(255, 240, 240, 240),
               borderRadius: BorderRadius.all(Radius.circular(20)),

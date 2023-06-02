@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
+import '../widgets/text_divider.dart';
 
 class TerrainCard extends StatelessWidget {
   final Function selectTerrain;
@@ -113,7 +114,7 @@ class TerrainCard extends StatelessWidget {
               )
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 65),
+              padding: const EdgeInsets.only(bottom: 0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -176,48 +177,12 @@ class TerrainCard extends StatelessWidget {
                 ],
               ) 
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 1, right: 1),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        border: Border(
-                            bottom: BorderSide(
-                              color: Color.fromARGB(255, 0, 68, 4),
-                              width: 2.0
-                            )
-                          )
-                      ),
-                    ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 2, right: 2),
-                    child: Text(
-                      'PROPRIEDADES',
-                      style: TextStyle(
-                        fontSize: 12
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(
-                            color: Color.fromARGB(255, 0, 68, 4),
-                            width: 2.0
-                          )
-                        )
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+            const Expanded(
+              child: SizedBox()
             ),
+            const TextDivider(label: 'PROPRIEDADES'),
             Padding(
-              padding: const EdgeInsets.only(top: 3),
+              padding: const EdgeInsets.only(bottom: 4),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
@@ -245,9 +210,10 @@ class TerrainCard extends StatelessWidget {
                 ]
               ),
             ),
-          ])
-        ),
-      )
+          ]
+        )
+      ),
+    )
     );
   }
 }

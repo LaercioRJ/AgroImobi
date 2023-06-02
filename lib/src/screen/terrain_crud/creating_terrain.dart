@@ -4,26 +4,32 @@ import 'specific_widgets/labeled_icon_button.dart';
 
 import './create_forms/basic_info_form.dart';
 import './create_forms/payment_form.dart';
-import './create_forms/photo_form.dart';
-import './create_forms/specific_info_form.dart';
+/*import './create_forms/photo_form.dart';
+import './create_forms/specific_info_form.dart';*/
+
+import '../../classes/terrain.dart';
 
 class CreatingTerrain extends StatefulWidget {
+  late Terrain terrainReference;
   final Function changeAction;
   CreatingTerrain({super.key, required this.changeAction});
   final _pageController = PageController(initialPage: 0);
 
-  nextStep(int newPageNumber) {
+  nextStep(int newPageNumber, Terrain terrainRefresh) {
     forms.add(pageList[newPageNumber - 1]);
     _pageController.animateToPage(newPageNumber, duration: const Duration(milliseconds: 750), curve: Curves.ease);
   }
 
   late List<Widget> forms = [
-    BasicInfoForm(onSubmit: () { nextStep(1);})
+    BasicInfoForm(
+      onSubmit: nextStep,
+      terrainReference: terrainReference
+    )
   ];
 
   late final pageList = [
-    SpecificInfoForm(onSubmit: () { nextStep(2); }),
-    PhotoForm(onSubmit: () { nextStep(3); }),
+    /*SpecificInfoForm(onSubmit: () { nextStep(2); }),
+    PhotoForm(onSubmit: () { nextStep(3); }),*/
     const PaymentForm()
   ];
 
@@ -32,6 +38,13 @@ class CreatingTerrain extends StatefulWidget {
 }
 
 class _CreatingTerrainState extends State<CreatingTerrain> {
+
+  @override
+  initState() {
+    widget.terrainReference = Terrain.createEmptyObject();
+    super.initState();
+  }
+
   Future<bool> _onBackPressed() {
     widget.changeAction("Visualizar");
     return Future.value(true);

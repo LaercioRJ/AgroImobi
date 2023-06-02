@@ -7,9 +7,9 @@ import 'package:helloworld/src/widgets/link_button.dart';
 import 'register_user.dart';
 import 'register_broker.dart';
 
-import 'package:helloworld/src/service_classes/message_deliver.dart';
+/*import 'package:helloworld/src/service_classes/message_deliver.dart';
 import 'package:helloworld/src/service_classes/regExp_validators.dart';
-import 'package:helloworld/src/server_connection/server_interface.dart';
+import 'package:helloworld/src/server_connection/server_interface.dart';*/
 
 class LoginScreen extends StatefulWidget {
   final VoidCallback onTapped;
