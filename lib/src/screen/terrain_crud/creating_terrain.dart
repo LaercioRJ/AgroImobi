@@ -4,8 +4,8 @@ import 'specific_widgets/labeled_icon_button.dart';
 
 import './create_forms/basic_info_form.dart';
 import './create_forms/payment_form.dart';
-/*import './create_forms/photo_form.dart';
-import './create_forms/specific_info_form.dart';*/
+/*import './create_forms/photo_form.dart';*/
+import './create_forms/specific_info_form.dart';
 
 import '../../classes/terrain.dart';
 
@@ -28,8 +28,8 @@ class CreatingTerrain extends StatefulWidget {
   ];
 
   late final pageList = [
-    /*SpecificInfoForm(onSubmit: () { nextStep(2); }),
-    PhotoForm(onSubmit: () { nextStep(3); }),*/
+    SpecificInfoForm(onSubmit: nextStep, terrainReference: terrainReference ),
+    /*PhotoForm(onSubmit: () { nextStep(3); }),*/
     const PaymentForm()
   ];
 
@@ -49,22 +49,6 @@ class _CreatingTerrainState extends State<CreatingTerrain> {
     widget.changeAction("Visualizar");
     return Future.value(true);
   }
-
-  // Organizar a zona repetitiva logo abaixo assim que houver tempo
-  /*late var photoForm = PhotoForm(onSubmit: () {
-    if (forms.length == 3) {
-      forms.add(const PaymentForm());
-    }
-    widget._pageController.animateToPage(3, duration: const Duration(milliseconds: 750), curve: Curves.ease);
-  });
-
-  late var specificForm = SpecificInfoForm(onSubmit:() {
-    if (forms.length == 2) {
-
-      forms.add(photoForm);
-    }
-    widget._pageController.animateToPage(2, duration: const Duration(milliseconds: 750), curve: Curves.ease);
-  });*/
 
   @override
   Widget build(BuildContext context) {
