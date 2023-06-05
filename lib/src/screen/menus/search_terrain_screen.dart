@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../../widgets/terrain_card.dart';
 import '../../widgets/twin_buttons.dart';
 
+import '../../classes/terrain.dart';
+
 class SearchTerrainsScreen extends StatelessWidget {
   final Function selectTerrain;
   SearchTerrainsScreen({
@@ -37,7 +39,10 @@ class SearchTerrainsScreen extends StatelessWidget {
               child: Wrap(
                 children: [
                   for (var i in text)
-                    TerrainCard(selectTerrain: selectTerrain)
+                    TerrainCard(
+                      selectTerrain: selectTerrain,
+                      terrain: Terrain.createMockObject(),
+                    )
                 ],
               ),
             ),

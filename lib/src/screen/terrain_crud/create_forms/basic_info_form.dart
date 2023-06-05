@@ -23,6 +23,8 @@ class BasicInfoForm extends StatefulWidget {
 class BasicInfoFormState extends State<BasicInfoForm> {
   final _formKey = GlobalKey<FormState>();
   final List<String> metricUnits = ['Hectar', 'Metros Qd.', 'Km Qd.'];
+  final List<String> states = ['SP', 'SC', 'RS', 'MG'];
+  final List<String> cities = ['Sorocaba', 'Bauru', 'Ribeirão Pt.'];
   final List<String> tutorialMessages = ['Seja bem-vindo', 'Olhe o que tem de bom!'];
   bool sellOption = false;
   bool rentOption = false;
@@ -113,6 +115,38 @@ class BasicInfoFormState extends State<BasicInfoForm> {
                                 ),
                               )
                             ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 13, top: 5),
+                                  child: Icon(
+                                    Icons.map,
+                                    color: Colors.green[600],
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width * 0.20,
+                                  child: Dropdown(
+                                    label: 'Estado',
+                                    list: states,
+                                    onSelect: (name) => {},
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 10),
+                                    child: Dropdown(
+                                      label: 'Cidade',
+                                      list: cities,
+                                      onSelect: (name) => {},
+                                    ),
+                                  )
+                                )
+                              ],
+                            ),
                           ),
                           const Padding(
                             padding: EdgeInsets.only(top: 15, bottom: 10),

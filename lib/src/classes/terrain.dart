@@ -3,6 +3,7 @@ import 'dart:convert';
 
 class Terrain {
   int id;
+  String title;
   bool sell;
   bool rent;
   double sellPrice;
@@ -11,13 +12,13 @@ class Terrain {
   String areaType;
   String aptidao;
   //String localizacao; // checar qual o tipo de dados
-  String cidade;
-  String estado;
+  String city;
+  String state;
   String relevo;
-  int tipo;
+  int advertisementType;
   String classificacao;
-  List<String> fotos = [];
-  String caracteristicas;
+  List<String> photos = [];
+  List<String> features;
   String tipoNegocio;
   String descricao;
   String dataInicio;
@@ -25,6 +26,7 @@ class Terrain {
 
   Terrain(
     this.id,
+    this.title,
     this.sell,
     this.rent,
     this.sellPrice,
@@ -32,13 +34,13 @@ class Terrain {
     this.totalArea,
     this.areaType,
     this.aptidao,
-    this.cidade,
-    this.estado,
+    this.city,
+    this.state,
     this.relevo,
-    this.tipo,
+    this.advertisementType,
     this.classificacao,
-    this.fotos,
-    this.caracteristicas,
+    this.photos,
+    this.features,
     this.tipoNegocio,
     this.descricao,
     this.dataInicio,
@@ -48,6 +50,7 @@ class Terrain {
   toJson() {
     Map<String, dynamic> terrainMap = {
       'id': id,
+      'title': title,
       'sell': sell,
       'rent': rent,
       'sellPrice': sellPrice,
@@ -55,13 +58,13 @@ class Terrain {
       'totalArea': totalArea,
       'areaType': areaType,
       'aptidao': aptidao,
-      'cidade': cidade,
-      'estado': estado,
+      'cidade': city,
+      'estado': state,
       'relevo': relevo,
-      'tipo': tipo,
+      'tipo': advertisementType,
       'classificacao': classificacao,
-      'fotos': fotos,
-      'caracteristicas': caracteristicas,
+      'fotos': photos,
+      'caracteristicas': features,
       'tipoNegocio': tipoNegocio,
       'descricao': descricao,
       'dataInicio': dataInicio,
@@ -74,6 +77,7 @@ class Terrain {
   static createEmptyObject() {
     Terrain terrain = Terrain(
       -1,
+      '',
       false,
       false,
       -1,
@@ -87,9 +91,36 @@ class Terrain {
       -1,
       '',
       ['', ''],
+      [''],
       '',
       '',
       '',
+      ''
+    );
+
+    return terrain;
+  }
+
+  static createMockObject() {
+    Terrain terrain = Terrain(
+      1,
+      'Fazenda com reserva natural',
+      true,
+      true,
+      200000,
+      5000,
+      5000,
+      'Hectare',
+      '',
+      'Bauru',
+      'SP',
+      'Planice',
+      1,
+      '',
+      ['lib/src/assets/terrain.jpg', 'lib/src/assets/diablo0.jpg'],
+      ['eletricidade', 'casa', 'agua'],
+      '',
+      'Nenhuma descrição',
       '',
       ''
     );
