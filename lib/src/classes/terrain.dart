@@ -10,11 +10,11 @@ class Terrain {
   double rentPrice;
   double totalArea;
   String areaType;
-  String aptidao;
+  String aptidao; // is it a select?
   //String localizacao; // checar qual o tipo de dados
-  String city;
-  String state;
-  String relevo;
+  String city; // select
+  String state; // select
+  String topography; // select
   int advertisementType;
   String classificacao;
   List<String> photos = [];
@@ -36,7 +36,7 @@ class Terrain {
     this.aptidao,
     this.city,
     this.state,
-    this.relevo,
+    this.topography,
     this.advertisementType,
     this.classificacao,
     this.photos,
@@ -60,7 +60,7 @@ class Terrain {
       'aptidao': aptidao,
       'cidade': city,
       'estado': state,
-      'relevo': relevo,
+      'topography': topography,
       'tipo': advertisementType,
       'classificacao': classificacao,
       'fotos': photos,
