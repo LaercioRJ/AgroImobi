@@ -13,7 +13,6 @@ class ServerInterface {
         }
       });
     } catch (exception) {
-      print(exception);
       return false;
     }
     return false;
@@ -28,7 +27,6 @@ class ServerInterface {
         return body['senha'] == data['response'][0]['senha'];
       }
     } catch (exception) {
-      print(exception);
       return false;
     }
     return false;
@@ -43,7 +41,6 @@ class ServerInterface {
         return data['response'][0];
       }
     } catch (exception) {
-      print(exception);
       return '';
     }
     return '';
