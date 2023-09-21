@@ -1,28 +1,28 @@
 class Broker {
-  String Nome;
+  String name;
   String email;
-  String senha;
-  String telefone;
-  String municipio;
+  String password;
+  String cellphone;
+  String city;
   String cpf;
   //String creci;
 
   Broker(
-    this.Nome,
+    this.name,
     this.email,
-    this.senha,
-    this.telefone,
-    this.municipio,
+    this.password,
+    this.cellphone,
+    this.city,
     this.cpf,
   );
 
   toJson() {
     Map<String, dynamic> brokerMap = {
       'email': email,
-      'senha': senha,
-      'Nome': Nome,
-      'telefone': telefone,
-      'municipio': municipio,
+      'senha': password,
+      'Nome': name,
+      'telefone': cellphone,
+      'municipio': city,
       'cpf': cpf,
     };
     //String brokerJson = jsonEncode(brokerMap);

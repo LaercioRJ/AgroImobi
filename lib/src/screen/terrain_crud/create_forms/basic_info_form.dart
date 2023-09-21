@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../specific_widgets/tutorial_card.dart';
+import '../../../widgets/tutorial_card.dart';
 
 import '../../../widgets/dropdown.dart';
 import '../../../widgets/text_divider.dart';
@@ -27,11 +27,6 @@ class BasicInfoFormState extends State<BasicInfoForm> {
     'Seja bem-vindo',
     'Olhe o que tem de bom!'
   ];
-  bool sellOption = false;
-  bool rentOption = false;
-  late String title;
-  late double sellPrice;
-  late double rentPrice;
 
   @override
   Widget build(BuildContext context) {
@@ -77,11 +72,12 @@ class BasicInfoFormState extends State<BasicInfoForm> {
                               inputFormatters: [
                                 LengthLimitingTextInputFormatter(25)
                               ],
+                              initialValue: widget.terrainReference.title,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return "Por favor, preencha este campo";
                                 }
-                                title = value;
+                                widget.terrainReference.title = value;
                                 return null;
                               },
                               decoration: InputDecoration(
@@ -98,6 +94,9 @@ class BasicInfoFormState extends State<BasicInfoForm> {
                               children: [
                                 Expanded(
                                   child: TextFormField(
+                                    initialValue: widget
+                                        .terrainReference.totalArea
+                                        .toString(),
                                     keyboardType: TextInputType.number,
                                     inputFormatters: <TextInputFormatter>[
                                       FilteringTextInputFormatter.digitsOnly
@@ -161,7 +160,8 @@ class BasicInfoFormState extends State<BasicInfoForm> {
                               padding: EdgeInsets.only(top: 15, bottom: 10),
                               child: TextDivider(label: 'TIPO TRANSAÇÃO'),
                             ),
-                            if (!(sellOption || rentOption))
+                            if (!(widget.terrainReference.sell ||
+                                widget.terrainReference.rent))
                               const Padding(
                                 padding: EdgeInsets.only(bottom: 10),
                                 child: Center(
@@ -180,10 +180,11 @@ class BasicInfoFormState extends State<BasicInfoForm> {
                                     Checkbox(
                                         activeColor: Colors.green,
                                         checkColor: Colors.white,
-                                        value: sellOption,
+                                        value: widget.terrainReference.sell,
                                         onChanged: (bool? value) {
                                           setState(() {
-                                            sellOption = value!;
+                                            widget.terrainReference.sell =
+                                                value!;
                                           });
                                         }),
                                     const Padding(
@@ -194,10 +195,11 @@ class BasicInfoFormState extends State<BasicInfoForm> {
                                     Checkbox(
                                         activeColor: Colors.green,
                                         checkColor: Colors.white,
-                                        value: rentOption,
+                                        value: widget.terrainReference.rent,
                                         onChanged: (bool? value) {
                                           setState(() {
-                                            rentOption = value!;
+                                            widget.terrainReference.rent =
+                                                value!;
                                           });
                                         }),
                                     const Padding(
@@ -209,20 +211,23 @@ class BasicInfoFormState extends State<BasicInfoForm> {
                             Padding(
                               padding: const EdgeInsets.only(bottom: 10),
                               child: TextFormField(
+                                initialValue: widget.terrainReference.sellPrice
+                                    .toString(),
                                 keyboardType: TextInputType.number,
                                 inputFormatters: <TextInputFormatter>[
                                   FilteringTextInputFormatter.digitsOnly
                                 ],
                                 validator: (value) {
-                                  if (sellOption) {
+                                  if (widget.terrainReference.sell) {
                                     if (value == null || value.isEmpty) {
                                       return 'Por favor, preencha este campo';
                                     }
-                                    sellPrice = double.parse(value);
+                                    widget.terrainReference.sellPrice =
+                                        double.parse(value);
                                   }
                                   return null;
                                 },
-                                enabled: sellOption,
+                                enabled: widget.terrainReference.sell,
                                 decoration: InputDecoration(
                                     labelText: 'Valor Venda',
                                     icon: const Icon(Icons.attach_money),
@@ -237,20 +242,23 @@ class BasicInfoFormState extends State<BasicInfoForm> {
                             Padding(
                               padding: const EdgeInsets.only(bottom: 10),
                               child: TextFormField(
+                                initialValue: widget.terrainReference.rentPrice
+                                    .toString(),
                                 keyboardType: TextInputType.number,
                                 inputFormatters: <TextInputFormatter>[
                                   FilteringTextInputFormatter.digitsOnly
                                 ],
                                 validator: (value) {
-                                  if (rentOption) {
+                                  if (widget.terrainReference.rent) {
                                     if (value == null || value.isEmpty) {
                                       return 'Por favor, preencha este campo';
                                     }
-                                    rentPrice = double.parse(value);
+                                    widget.terrainReference.rentPrice =
+                                        double.parse(value);
                                   }
                                   return null;
                                 },
-                                enabled: rentOption,
+                                enabled: widget.terrainReference.rent,
                                 decoration: InputDecoration(
                                     labelText: 'Valor Arrendamento',
                                     icon: const Icon(Icons.paid),
@@ -281,9 +289,11 @@ class BasicInfoFormState extends State<BasicInfoForm> {
                                         onPressed: () {
                                           if (_formKey.currentState!
                                                   .validate() &&
-                                              (sellOption || rentOption)) {
+                                              (widget.terrainReference.sell ||
+                                                  widget
+                                                      .terrainReference.rent)) {
                                             widget.onSubmit(
-                                                1, widget.terrainReference);
+                                                1, widget.terrainReference, 0);
                                           }
                                         },
                                         child: const Text('Definir')),

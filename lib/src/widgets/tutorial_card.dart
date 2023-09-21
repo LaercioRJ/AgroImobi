@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../widgets/action_dialog.dart';
+import 'action_dialog.dart';
 
 class TutorialCard extends StatefulWidget {
   List<String> tutorialMessages = [''];

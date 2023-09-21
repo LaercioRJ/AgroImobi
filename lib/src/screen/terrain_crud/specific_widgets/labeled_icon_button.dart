@@ -1,29 +1,19 @@
 import 'package:flutter/material.dart';
 
-class LabeledIconButton extends StatefulWidget {
+class LabeledIconButton extends StatelessWidget {
+  Color color;
   final String label;
   final Widget icon;
-  Color color;
+  bool disabled;
   final VoidCallback pressedFunction;
-  LabeledIconButton({
-      Key? key,
+  LabeledIconButton(
+      {Key? key,
       required this.label,
       required this.icon,
       required this.pressedFunction,
-      required this.color
-    }) : super(key: key);
-
-  @override
-  State<LabeledIconButton> createState() => _LabeledIconButtonState();
-}
-
-class _LabeledIconButtonState extends State<LabeledIconButton> {
-
-  changeColor(Color color) {
-    setState(() {
-      widget.color = color;
-    });
-  }
+      required this.color,
+      this.disabled = false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,26 +21,22 @@ class _LabeledIconButtonState extends State<LabeledIconButton> {
       children: [
         Container(
           child: IconButton(
-            onPressed: ()  {
-              widget.pressedFunction();
-              changeColor(Colors.green);
+            onPressed: () {
+              if (!disabled) {
+                pressedFunction();
+              }
             },
-            color: widget.color,
-            icon: widget.icon,
-            style: IconButton.styleFrom(
-              backgroundColor: Colors.white
-            ),
+            color: color,
+            icon: icon,
+            style: IconButton.styleFrom(backgroundColor: Colors.white),
           ),
           decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(width: 2, color: widget.color)
-          ),
+              shape: BoxShape.circle,
+              border: Border.all(width: 2, color: color)),
         ),
         Text(
-          widget.label,
-          style: TextStyle(
-            color: widget.color
-          ),
+          label,
+          style: TextStyle(color: color),
         )
       ],
     );

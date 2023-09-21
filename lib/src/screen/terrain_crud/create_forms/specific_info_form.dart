@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../specific_widgets/tutorial_card.dart';
+import '../../../widgets/tutorial_card.dart';
 import '../../../widgets/dropdown.dart';
 import '../../../widgets/text_divider.dart';
 
