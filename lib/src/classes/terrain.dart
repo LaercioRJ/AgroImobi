@@ -75,55 +75,34 @@ class Terrain {
   }
 
   static createEmptyObject() {
-    Terrain terrain = Terrain(
-      -1,
-      '',
-      false,
-      false,
-      -1,
-      -1,
-      -1,
-      '',
-      '',
-      '',
-      '',
-      '',
-      -1,
-      '',
-      ['', ''],
-      [''],
-      '',
-      '',
-      '',
-      ''
-    );
+    Terrain terrain = Terrain(-1, '', false, false, 0, 0, 0, '', '', '', '', '',
+        -1, '', ['', ''], [''], '', '', '', '');
 
     return terrain;
   }
 
   static createMockObject() {
     Terrain terrain = Terrain(
-      1,
-      'Fazenda com reserva natural',
-      true,
-      true,
-      200000,
-      5000,
-      5000,
-      'Hectare',
-      '',
-      'Bauru',
-      'SP',
-      'Planice',
-      1,
-      '',
-      ['lib/src/assets/terrain.jpg', 'lib/src/assets/diablo0.jpg'],
-      ['eletricidade', 'casa', 'agua'],
-      '',
-      'Nenhuma descrição',
-      '',
-      ''
-    );
+        1,
+        'Fazenda com reserva natural',
+        true,
+        true,
+        200000,
+        5000,
+        5000,
+        'Hectare',
+        '',
+        'Bauru',
+        'SP',
+        'Planice',
+        1,
+        '',
+        ['lib/src/assets/terrain.jpg', 'lib/src/assets/diablo0.jpg'],
+        ['eletricidade', 'casa', 'agua'],
+        '',
+        'Nenhuma descrição',
+        '',
+        '');
 
     return terrain;
   }

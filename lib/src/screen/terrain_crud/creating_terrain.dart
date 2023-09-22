@@ -38,7 +38,7 @@ class _CreatingTerrainState extends State<CreatingTerrain> {
     const PaymentForm()
   ];
 
-  nextStep(int newPageNumber, Terrain terrainRefresh, keyIndex) {
+  nextStep(int newPageNumber, Terrain terrainRefresh) {
     forms.add(pageList[newPageNumber - 1]);
     widget._pageController.animateToPage(newPageNumber,
         duration: const Duration(milliseconds: 750), curve: Curves.ease);
@@ -62,7 +62,7 @@ class _CreatingTerrainState extends State<CreatingTerrain> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-        // will execute this function when back buttom pressed
+        // will execute this function when back buttom pressed and the view poped
         onWillPop: _onBackPressed,
         child: Scaffold(
             appBar: AppBar(

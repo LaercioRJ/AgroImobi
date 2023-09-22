@@ -97,6 +97,16 @@ class BasicInfoFormState extends State<BasicInfoForm> {
                                     initialValue: widget
                                         .terrainReference.totalArea
                                         .toString(),
+                                    validator: (value) {
+                                      if (value == null ||
+                                          value.isEmpty ||
+                                          double.parse(value) < 1) {
+                                        return "Valor inválido.";
+                                      }
+                                      widget.terrainReference.totalArea =
+                                          double.parse(value);
+                                      return null;
+                                    },
                                     keyboardType: TextInputType.number,
                                     inputFormatters: <TextInputFormatter>[
                                       FilteringTextInputFormatter.digitsOnly
@@ -220,7 +230,11 @@ class BasicInfoFormState extends State<BasicInfoForm> {
                                 validator: (value) {
                                   if (widget.terrainReference.sell) {
                                     if (value == null || value.isEmpty) {
-                                      return 'Por favor, preencha este campo';
+                                      return 'Por favor, preencha este campo.';
+                                    }
+                                    if (double.parse(value) < 1) {
+                                      return 'Por favor, utilize valores'
+                                          'maiores que 1.';
                                     }
                                     widget.terrainReference.sellPrice =
                                         double.parse(value);
@@ -251,7 +265,10 @@ class BasicInfoFormState extends State<BasicInfoForm> {
                                 validator: (value) {
                                   if (widget.terrainReference.rent) {
                                     if (value == null || value.isEmpty) {
-                                      return 'Por favor, preencha este campo';
+                                      return 'Por favor, preencha este campo.';
+                                    }
+                                    if (double.parse(value) < 1) {
+                                      return 'Por favor, utilize valores maiores do que 1.';
                                     }
                                     widget.terrainReference.rentPrice =
                                         double.parse(value);
@@ -293,7 +310,7 @@ class BasicInfoFormState extends State<BasicInfoForm> {
                                                   widget
                                                       .terrainReference.rent)) {
                                             widget.onSubmit(
-                                                1, widget.terrainReference, 0);
+                                                1, widget.terrainReference);
                                           }
                                         },
                                         child: const Text('Definir')),
