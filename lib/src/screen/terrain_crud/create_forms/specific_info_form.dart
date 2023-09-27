@@ -19,11 +19,26 @@ class SpecificInfoForm extends StatefulWidget {
 
 class SpecificInfoFormState extends State<SpecificInfoForm> {
   final List<String> tutorialMessages = ['Olha aqui', 'Vem aqui'];
-  final List<String> topographys = [
+  final List<String> characteristics = ['Lago', 'Energia', 'Casa'];
+  final List<String> reliefs = [
     'Planice',
     'Montanhoso',
     'Pequenas Irregulariedades'
   ];
+  final List<String> soils = ['Arenoso', 'Argiloso', 'Indiferente'];
+  final List<String> applications = [
+    'Cultivo',
+    'Lazer',
+    'Criação de Animais',
+    'Outro'
+  ];
+  late var selectedChar = characteristics[0];
+
+  List<String> selectedChars = [];
+  late var selectedRelief = reliefs[0];
+  late var selectedSoil = soils[0];
+  late var selectedApplication = applications[0];
+  var detailedApplicationVisible = false;
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -83,28 +98,158 @@ class SpecificInfoFormState extends State<SpecificInfoForm> {
                                             BorderSide(color: Colors.green))),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(top: 10),
-                                child: TextFormField(
-                                  decoration: InputDecoration(
-                                    labelText: 'Aptidão',
-                                    fillColor: Colors.green,
-                                    icon: const Icon(Icons.done_outline),
-                                    iconColor: Colors.green[600],
-                                    focusColor: Colors.green,
-                                  ),
-                                ),
-                              ),
+                                  padding: const EdgeInsets.only(top: 10),
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 15),
+                                        child: Icon(
+                                          Icons.area_chart_rounded,
+                                          color: Colors.green[600],
+                                        ),
+                                      ),
+                                      Expanded(
+                                          child: Dropdown(
+                                        label: 'Relevo Predominante',
+                                        list: reliefs,
+                                        onSelect: (selected) =>
+                                            {selectedRelief = selected},
+                                      ))
+                                    ],
+                                  )),
                               Padding(
-                                padding: const EdgeInsets.only(top: 10),
-                                child: Dropdown(
-                                  label: 'Tipo Predominante de Relevo',
-                                  list: topographys,
-                                  onSelect: (name) => {},
+                                padding: const EdgeInsets.only(bottom: 10),
+                                child: Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 15),
+                                      child: Icon(
+                                        Icons.grass_sharp,
+                                        color: Colors.green[600],
+                                      ),
+                                    ),
+                                    Expanded(
+                                        child: Dropdown(
+                                      label: 'Tipo de Solo',
+                                      list: soils,
+                                      onSelect: (selected) =>
+                                          {selectedSoil = selected},
+                                    ))
+                                  ],
                                 ),
                               ),
                               const Padding(
                                   padding: EdgeInsets.only(top: 10, bottom: 10),
-                                  child: TextDivider(label: 'PROPRIEDADES')),
+                                  child: TextDivider(label: 'Aplicação')),
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 10),
+                                child: Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 15),
+                                      child: Icon(
+                                        Icons.check,
+                                        color: Colors.green[600],
+                                      ),
+                                    ),
+                                    Expanded(
+                                        child: Dropdown(
+                                      label: 'Uso atual ou Melhor Aplicação',
+                                      list: applications,
+                                      onSelect: (selected) => {
+                                        if (selected == 'Outro')
+                                          {
+                                            setState(() {
+                                              detailedApplicationVisible = true;
+                                            })
+                                          }
+                                        else if (selectedApplication != 'Outro')
+                                          {
+                                            setState(() {
+                                              detailedApplicationVisible =
+                                                  false;
+                                            })
+                                          },
+                                        selectedApplication = selected,
+                                      },
+                                    ))
+                                  ],
+                                ),
+                              ),
+                              Visibility(
+                                  visible: detailedApplicationVisible,
+                                  child: TextFormField(
+                                    decoration: const InputDecoration(
+                                        label: Text('Detalhamento'),
+                                        border: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                                color: Colors.green))),
+                                  )),
+                              const Padding(
+                                  padding: EdgeInsets.only(top: 10, bottom: 10),
+                                  child: TextDivider(label: 'CARACTERÍSTICAS')),
+                              Row(children: [
+                                Expanded(
+                                    child: Dropdown(
+                                        list: characteristics,
+                                        label: 'Detalhes',
+                                        onSelect: (value) => setState(() {
+                                              selectedChar = value;
+                                            }))),
+                                Expanded(
+                                  child: Container(
+                                    alignment: Alignment.bottomCenter,
+                                    width: double.infinity,
+                                    height: 60,
+                                    child: ElevatedButton.icon(
+                                      onPressed: () => {
+                                        if (selectedChar != '' &&
+                                            (selectedChars.lastIndexOf(
+                                                    selectedChar) ==
+                                                -1))
+                                          {
+                                            setState(() {
+                                              selectedChars.add(selectedChar);
+                                              selectedChar = '';
+                                            }),
+                                          }
+                                      },
+                                      label: const Text('Adicionar'),
+                                      icon: const Icon(Icons.add_box),
+                                      style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.green[400]),
+                                    ),
+                                  ),
+                                )
+                              ]),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 15),
+                                child: Wrap(
+                                  children: [
+                                    for (var selected in selectedChars)
+                                      Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 5),
+                                          child: Chip(
+                                            backgroundColor: Colors.green[200],
+                                            label: Text(
+                                              selected,
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                            onDeleted: () => {
+                                              setState(() {
+                                                selectedChars.remove(selected);
+                                              })
+                                            },
+                                            deleteIcon: const Icon(
+                                                Icons.delete_forever),
+                                            deleteIconColor: Colors.red[500],
+                                          ))
+                                  ],
+                                ),
+                              ),
                               Center(
                                 child: SizedBox(
                                   width:

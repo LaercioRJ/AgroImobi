@@ -46,8 +46,8 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   void _saveData() {
     setState(() {
       _isEditing = false;
-      var user = User(_nameController.text, _emailController.text,
-          _passwordController.text);
+      /*var user = User(_nameController.text, _emailController.text,
+          _passwordController.text);*/
 
       //erverInterface().sendingInformation('http://localhost:3000/login/', user.toJson());
     });
