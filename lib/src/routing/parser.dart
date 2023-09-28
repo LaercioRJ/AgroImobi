@@ -27,7 +27,7 @@ class AgroNpInformationParser extends RouteInformationParser<AgroNpRoutePath> {
           {
             return AgroNpRoutePath.myprofile();
           }
-        
+
         case "myterrains":
           {
             return AgroNpRoutePath.myTerrains();
@@ -43,7 +43,7 @@ class AgroNpInformationParser extends RouteInformationParser<AgroNpRoutePath> {
             return AgroNpRoutePath.myFavorites();
           }
 
-        case "buildterrain" :
+        case "buildterrain":
           {
             return AgroNpRoutePath.buildTerrain();
           }
@@ -62,7 +62,6 @@ class AgroNpInformationParser extends RouteInformationParser<AgroNpRoutePath> {
       }
 
       switch (remaining) {
-
         case "myterrains":
           {
             return AgroNpRoutePath.viusualizePrivateTerrain(id);
@@ -89,7 +88,6 @@ class AgroNpInformationParser extends RouteInformationParser<AgroNpRoutePath> {
 
   @override
   RouteInformation restoreRouteInformation(AgroNpRoutePath configuration) {
-
     if (configuration.isLogged) {
       return const RouteInformation(location: '/login');
     }
@@ -103,7 +101,8 @@ class AgroNpInformationParser extends RouteInformationParser<AgroNpRoutePath> {
     }
 
     if (configuration.isViewPublicTerrain) {
-      return RouteInformation(location: '/searchterrain/${configuration.terrainId}');
+      return RouteInformation(
+          location: '/searchterrain/${configuration.terrainId}');
     }
 
     if (configuration.isMyProfile) {
@@ -115,7 +114,8 @@ class AgroNpInformationParser extends RouteInformationParser<AgroNpRoutePath> {
     }
 
     if (configuration.isViewFavoriteTerrain) {
-      return RouteInformation(location: '/myfavorites/${configuration.terrainId}');
+      return RouteInformation(
+          location: '/myfavorites/${configuration.terrainId}');
     }
 
     if (configuration.isMyTerrains) {
@@ -123,7 +123,8 @@ class AgroNpInformationParser extends RouteInformationParser<AgroNpRoutePath> {
     }
 
     if (configuration.isViewPrivateTerrain) {
-      return RouteInformation(location: '/myterrains/${configuration.terrainId}');
+      return RouteInformation(
+          location: '/myterrains/${configuration.terrainId}');
     }
 
     return const RouteInformation(location: '/404');

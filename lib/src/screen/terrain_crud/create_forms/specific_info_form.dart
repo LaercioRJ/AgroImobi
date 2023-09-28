@@ -83,6 +83,12 @@ class SpecificInfoFormState extends State<SpecificInfoForm> {
                               ),
                               TextFormField(
                                 maxLines: 5,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return "Por favor, preencha este campo";
+                                  }
+                                  return null;
+                                },
                                 inputFormatters: [
                                   LengthLimitingTextInputFormatter(50)
                                 ],
@@ -180,6 +186,13 @@ class SpecificInfoFormState extends State<SpecificInfoForm> {
                               Visibility(
                                   visible: detailedApplicationVisible,
                                   child: TextFormField(
+                                    validator: (value) {
+                                      if (detailedApplicationVisible &&
+                                          (value == null || value.isEmpty)) {
+                                        return "Por favor, preencha este cammpo";
+                                      }
+                                      return null;
+                                    },
                                     decoration: const InputDecoration(
                                         label: Text('Detalhamento'),
                                         border: UnderlineInputBorder(
@@ -189,6 +202,17 @@ class SpecificInfoFormState extends State<SpecificInfoForm> {
                               const Padding(
                                   padding: EdgeInsets.only(top: 10, bottom: 10),
                                   child: TextDivider(label: 'CARACTERÍSTICAS')),
+                              if (selectedChars.isEmpty)
+                                const Padding(
+                                  padding: EdgeInsets.only(bottom: 10),
+                                  child: Center(
+                                    child: Text(
+                                      'Por fravor, selecione pelo menos uma caracteristica',
+                                      style: TextStyle(
+                                          color: Colors.red, fontSize: 17),
+                                    ),
+                                  ),
+                                ),
                               Row(children: [
                                 Expanded(
                                     child: Dropdown(
