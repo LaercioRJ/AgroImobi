@@ -30,22 +30,41 @@ class VisualizeTerrain extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.33,
                 child: GestureDetector(
-                  onTap: () => {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => ImageVisualization(
-                              images: images,
-                            )))
-                  },
-                  child: PageView(
-                    controller: pageController,
-                    scrollDirection: Axis.horizontal,
-                    pageSnapping: true,
-                    physics: const BouncingScrollPhysics(),
-                    children: [
-                      for (var image in images)
-                        Image.asset(image, fit: BoxFit.cover),
-                    ],
-                  ),
-                ))));
+                    onTap: () => {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => ImageVisualization(
+                                    images: images,
+                                  )))
+                        },
+                    child: Stack(
+                      children: [
+                        PageView(
+                          controller: pageController,
+                          scrollDirection: Axis.horizontal,
+                          pageSnapping: true,
+                          physics: const BouncingScrollPhysics(),
+                          children: [
+                            for (var image in images)
+                              Image.asset(image, fit: BoxFit.cover),
+                          ],
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              top: MediaQuery.of(context).size.height * 0.29),
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height * 0.04,
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [
+                                  Colors.white.withOpacity(0),
+                                  Colors.white
+                                ])),
+                          ),
+                        )
+                      ],
+                    )))));
   }
 }
