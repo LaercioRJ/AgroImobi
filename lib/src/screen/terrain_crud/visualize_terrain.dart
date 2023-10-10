@@ -26,25 +26,26 @@ class VisualizeTerrain extends StatelessWidget {
         onWillPop: _onBackPressed,
         child: Scaffold(
             appBar: AppBar(title: const Text('Novo Anúncio')),
-            body: GestureDetector(
-                onTap: () => {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => ImageVisualization(
-                                images: images,
-                              )))
-                    },
-                child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height * 0.33,
-                    child: PageView(
-                      controller: pageController,
-                      scrollDirection: Axis.horizontal,
-                      pageSnapping: true,
-                      physics: const BouncingScrollPhysics(),
-                      children: [
-                        for (var image in images)
-                          Image.asset(image, fit: BoxFit.cover),
-                      ],
-                    )))));
+            body: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.33,
+                child: GestureDetector(
+                  onTap: () => {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => ImageVisualization(
+                              images: images,
+                            )))
+                  },
+                  child: PageView(
+                    controller: pageController,
+                    scrollDirection: Axis.horizontal,
+                    pageSnapping: true,
+                    physics: const BouncingScrollPhysics(),
+                    children: [
+                      for (var image in images)
+                        Image.asset(image, fit: BoxFit.cover),
+                    ],
+                  ),
+                ))));
   }
 }
