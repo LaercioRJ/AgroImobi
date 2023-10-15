@@ -30,6 +30,7 @@ class _AgroNpAppState extends State<AgroNpApp> {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Books App',
+      debugShowCheckedModeBanner: false,
       scrollBehavior: const MyCustomScrollBehavior(),
       routerDelegate: _routerDelegate,
       routeInformationParser: _routeInformationParser,

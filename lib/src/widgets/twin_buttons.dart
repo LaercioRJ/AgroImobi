@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 class TwinButtons extends StatefulWidget {
   final String titleLeft;
   final String titleRight;
-  bool rightActivated = true;
 
-  TwinButtons({Key? key, required this.titleLeft, required this.titleRight})
+  const TwinButtons(
+      {Key? key, required this.titleLeft, required this.titleRight})
       : super(key: key);
 
   @override
@@ -15,15 +15,17 @@ class TwinButtons extends StatefulWidget {
 }
 
 class TwinButtonsState extends State<TwinButtons> {
+  bool rightActivated = true;
+
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         OutlinedButton(
-            onPressed: () => {setState(() => widget.rightActivated = false)},
+            onPressed: () => {setState(() => rightActivated = false)},
             style: OutlinedButton.styleFrom(
-                backgroundColor: widget.rightActivated
+                backgroundColor: rightActivated
                     ? Colors.grey.shade300
                     : Colors.grey.shade100,
                 shape: const RoundedRectangleBorder(
@@ -34,9 +36,9 @@ class TwinButtonsState extends State<TwinButtons> {
                         bottomRight: Radius.zero))),
             child: Text(widget.titleLeft)),
         OutlinedButton(
-            onPressed: () => {setState(() => widget.rightActivated = true)},
+            onPressed: () => {setState(() => rightActivated = true)},
             style: OutlinedButton.styleFrom(
-                backgroundColor: widget.rightActivated
+                backgroundColor: rightActivated
                     ? Colors.grey.shade100
                     : Colors.grey.shade300,
                 shape: const RoundedRectangleBorder(
